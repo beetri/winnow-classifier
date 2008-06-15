@@ -13,6 +13,7 @@ import weka.core.stemmers.Stemmer;
 
 public class TrecFilter {
 	
+	@SuppressWarnings("unchecked")
 	public Instances filter(Instances inputDataSet) {
 		Instances resultDataSet = new Instances("TrecFilter",getAttributesFastVector(),inputDataSet.numInstances());
 		resultDataSet.setClassIndex(0);

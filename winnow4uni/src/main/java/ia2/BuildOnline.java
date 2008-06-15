@@ -6,7 +6,6 @@ import ia2.preprocess.TrecPreprocessor;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
-import java.io.File;
 import java.io.FileReader;
 
 import weka.classifiers.Classifier;

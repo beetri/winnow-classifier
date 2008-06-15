@@ -5,6 +5,11 @@ import java.io.Serializable;
 
 public class Specialist implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8918467399163496664L;
+	
 	private double weigth;
 	
 	public Specialist(int numValues) {

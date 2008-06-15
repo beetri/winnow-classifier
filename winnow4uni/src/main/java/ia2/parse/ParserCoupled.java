@@ -80,6 +80,7 @@ public class ParserCoupled implements Parser {
 
 	private Instance readInstance(String line, Instances dataSet) {
 		String nameCoarseCategory;		//La classe generica
+		@SuppressWarnings("unused")
 		String nameFineCategory;		//La classe specifica
 		String question;				//La domanda divisa in token
 		
