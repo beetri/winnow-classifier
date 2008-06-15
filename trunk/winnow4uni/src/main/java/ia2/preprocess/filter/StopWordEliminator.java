@@ -1,11 +1,48 @@
 package ia2.preprocess.filter;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@SuppressWarnings("serial")
 public class StopWordEliminator {
 	
-	private static List<String> stopWords = new LinkedList<String>(){
+	private static String[] stopWordsArray = new String[] {
+//															"I", 
+														/*	"a",	"about",	"an",	"are", "as", */"at",
+															"be",	"by",
+															"com",
+															"de",
+															"en",
+//															"for",	"from",
+//															"how",
+//															"in",	"is",		"it",
+//															"la",
+//															"on",	"or",
+//															"that",	"the",		"this",	"to",
+														/*	"was",	"what",		"when",	"where", "who", */"will", "with",
+//															"und",
+//															"www"
+															};
+	private static String[] allStopWordsArray = new String[] {
+															"I", 
+															"a",	"about",	"an",	"are", "as", "at",
+															"be",	"by",
+															"com",
+															"de",
+															"en",
+															"for",	"from",
+															"how",
+															"in",	"is",		"it",
+															"la",
+															"on",	"or",
+															"that",	"the",		"this",	"to",
+															"was",	"what",		"when",	"where", "who", "will", "with",
+															"und",
+															"www"
+															};
+	
+	@SuppressWarnings("unused")
+	private static Set<String> stopWords = new HashSet<String>(){
 		{
 //		     add("I");
 //		     add("a");
@@ -50,7 +87,7 @@ public class StopWordEliminator {
 		return stopWords2.contains(word);
 	}
 	
-	private static List<String> stopWords2 = new LinkedList<String>(){
+	private static Set<String> stopWords2 = new HashSet<String>(){
 		{
 			add("a");
 			add("about");

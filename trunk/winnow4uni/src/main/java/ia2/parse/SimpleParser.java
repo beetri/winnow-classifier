@@ -1,6 +1,5 @@
 package ia2.parse;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,6 +81,7 @@ public class SimpleParser implements Parser {
 
 	private Instance readInstance(String line, Instances dataSet) {
 		String nameCoarseCategory;		//La classe generica
+		@SuppressWarnings("unused")
 		String nameFineCategory;		//La classe specifica
 		String question;				//La domanda divisa in token
 		

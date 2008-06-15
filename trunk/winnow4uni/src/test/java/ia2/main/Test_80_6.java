@@ -1,0 +1,54 @@
+package ia2.main;
+
+import static ia2.util.Resource.getFile;
+import ia2.freezedclassifierAndTools.TrecPreprocessor_80_6;
+import ia2.parse.Parser;
+import ia2.parse.TestFilter;
+import ia2.parse.TrecParser;
+import ia2.winnow.WinnowClassifier;
+
+import java.io.FileReader;
+
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.core.Instances;
+
+
+public class Test_80_6 {
+	
+	public static void main(String[] args) throws Exception {
+		System.setProperty("wordnet.database.dir","D:\\Software\\Installato\\Weka\\WordNet-3.0\\dict");
+		
+		Parser parser = new TrecParser(new FileReader(getFile("/train_5500.label")));
+		Instances dataSet = parser.getDataSet();
+		Instances filteredDataSet = new TrecPreprocessor_80_6().convert(dataSet);
+//		System.exit(0);
+		
+		Instances testInstances = new TestFilter(filteredDataSet).revertInstances(new TrecPreprocessor_80_6().convert(
+										new TrecParser(
+												new FileReader(getFile("/TREC_10.label"))
+												).getDataSet()
+										)
+									);
+//		System.exit(0);
+//		System.out.println(filteredDataSet);
+		Evaluation e = new Evaluation(filteredDataSet);
+		Classifier classifier = new WinnowClassifier();
+		classifier.buildClassifier(filteredDataSet);
+		e.evaluateModel(classifier, filteredDataSet);
+		printResult(e,"CROSS VALIDATION");
+		e = new Evaluation(testInstances);
+		e.evaluateModel(classifier, testInstances);
+		printResult(e,"TEST VALIDATION");
+	}
+	
+	private static void printResult(Evaluation e,String title) throws Exception {
+		System.out.println("RISULTATO "+title);
+		System.out.println(e.toSummaryString());	
+		System.out.println(e.toMatrixString(title));
+		System.out.println(e.toCumulativeMarginDistributionString());
+		System.out.println(e.toClassDetailsString());
+		
+	}
+
+}

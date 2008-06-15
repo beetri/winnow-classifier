@@ -1,12 +1,10 @@
 package ia2.winnow;
 
-
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
 import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -16,6 +14,11 @@ import weka.core.UnsupportedClassTypeException;
 
 public class MockClassifier extends Classifier {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8418072165471394579L;
+
 	@Override
 	public void buildClassifier(Instances data) throws Exception {
 //		this.checkIntegrity(data);
@@ -23,7 +26,7 @@ public class MockClassifier extends Classifier {
 		data.deleteWithMissingClass();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private void checkIntegrity(Instances data) throws UnsupportedClassTypeException, UnsupportedAttributeTypeException, NoSupportForMissingValuesException {
 		if (!data.classAttribute().isNominal())
 			throw new UnsupportedClassTypeException("Le classi devono essere nominali.");

@@ -17,6 +17,7 @@ public class TestFilter {
 		this.azzeratore = new double[this.outputFormat.numAttributes()];
 	}
 
+	@SuppressWarnings("unchecked")
 	public Instances revertInstances(Instances testDataSet) {
 		Instances resultDataSet = this.outputFormat.stringFreeStructure();
 		Enumeration<Instance> instances = testDataSet.enumerateInstances();
@@ -27,6 +28,7 @@ public class TestFilter {
 		return resultDataSet;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Instance createInstanceQuasiBase(Instances newDataSet, Instance testInstance) {
 		Instance resultInstance = new Instance(newDataSet.numAttributes());//TODO accoppiato con il numero di attributo
 //		Instance resultInstance = new Instance(oldInstance.weight(),new double[newDataSet.numAttributes()]);

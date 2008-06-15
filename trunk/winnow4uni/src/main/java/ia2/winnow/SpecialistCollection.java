@@ -63,6 +63,7 @@ public class SpecialistCollection implements Serializable {
 		specialist.decreaseWeight();
 	}
 
+	@SuppressWarnings("unused")
 	private int threshold() {
 //		return this.index2Specialist.size();
 		return (int) Math.round(Math.log10(this.maxNum/2));
