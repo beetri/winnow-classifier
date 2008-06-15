@@ -1,0 +1,17 @@
+@relation 'default dataset-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1000-N0-stemmerweka.core.stemmers.NullStemmer-M1-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"-weka.filters.unsupervised.attribute.Reorder-R2-last,1'
+
+@attribute question [asd,qwe,dfg,ghj,ghjs]
+@attribute Class {ABBR,DESC,ENTY,HUM,LOC,NUM}
+
+@data
+[1,0,1,0,1],ABBR
+[1,0,1,0,1],ENTY
+[1,0,1,0,1],DESC
+[1,0,1,0,1],ABBR
+[1,0,1,0,1],ENTY
+[1,0,1,0,1],ABBR
+[1,0,1,0,1],DESC
+[1,0,1,0,1],ABBR
+[1,0,1,0,1],ABBR
+[1,0,1,0,1],DESC
+[1,0,1,0,1],NUM
