@@ -3,8 +3,10 @@ import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
 import ia2.preprocess.TrecPreprocessor;
+import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
+import java.io.File;
 import java.io.FileReader;
 
 import weka.classifiers.Classifier;
@@ -19,12 +21,12 @@ public class BuildOnline {
 	public static void main(String[] args) throws Exception {
 		
 		Classifier classifier = new WinnowClassifier();
-		
-		Parser trainParser = new TrecParser(new FileReader("src/train_5500.label"));			
+				
+		Parser trainParser = new TrecParser(new FileReader(Resource.getFile("/train_5500.label")));			
 		Instances dataSet = trainParser.getDataSet(numberOfInstance  );
 		Instances trainDataSet = new TrecPreprocessor().convert(dataSet);		
 		
-		TrecParser testParser = new TrecParser(new FileReader("src/TREC_10.label"));
+		TrecParser testParser = new TrecParser(new FileReader(Resource.getFile("/TREC_10.label")));
 		Instances testDataSet = testParser.getDataSet();
 		Instances filteredTestDataSet = new TrecPreprocessor().convert(testDataSet);
 		Instances testInstances = new TestFilter(trainDataSet).revertInstances(filteredTestDataSet);
