@@ -23,6 +23,16 @@
       <groupId>weka</groupId>
       <artifactId>weka</artifactId>
       <version>3.5.7</version>
+    </dependency>    
+    <dependency>
+      <groupId>snowball</groupId>
+      <artifactId>snowball</artifactId>
+      <version>2005.10.19</version>
+    </dependency>
+     <dependency>
+      <groupId>jaws</groupId>
+      <artifactId>jaws</artifactId>
+      <version>1.1</version>
     </dependency>
   </dependencies>
 </project>

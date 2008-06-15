@@ -42,6 +42,7 @@ public class TrecFilter {
 	
 	public TrecFilter() throws Exception {
 //		snowballStemmer = new englishStemmer();
+//		Class.forName("net.sf.snowball.ext.PorterStemmer");
 		stemmer = new SnowballStemmer();
 	}
 	
