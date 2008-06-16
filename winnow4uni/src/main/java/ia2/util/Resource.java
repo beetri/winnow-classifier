@@ -4,15 +4,18 @@ import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import ia2.BuildOnline;
-
 public final class Resource {
 	
-	public static URI getURI(String file) throws URISyntaxException{
-		return BuildOnline.class.getResource(file).toURI();
+	private static URI getAbsolutePath(String file) throws URISyntaxException{
+		return Resource.class.getResource("/"+file).toURI();
 	}
-	public static File getFile(String file) throws URISyntaxException{
-		return new File(getURI(file));
+	public static File getResourceFile(String file) throws URISyntaxException{
+		return new File(getAbsolutePath(file));
+	}
+
+	public static File getNewFile(String fileName) throws URISyntaxException{
+		File file = new File(Resource.class.getResource("/").toURI());
+		return new File(file.getParent()+"/"+fileName);
 	}
 
 }
