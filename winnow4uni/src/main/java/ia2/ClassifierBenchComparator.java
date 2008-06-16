@@ -5,17 +5,14 @@ import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
 import ia2.preprocess.Preprocessor;
-import ia2.preprocess.TrecPreprocessor;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 import ia2.winnow.weka.WinnowCollector;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Enumeration;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -27,7 +24,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.SMO;
-import weka.core.Instance;
 import weka.core.Instances;
 
 public class ClassifierBenchComparator {
@@ -38,8 +34,8 @@ public class ClassifierBenchComparator {
 	private static final String TEST_DATASET = "TREC_10.label";
 	private static final String TRAIN_DATASET = "train_5500.label";
 	private static final String CHART_FILE = "ClassifierComparison.png";
-	private static int NUMBER_OF_INSTANCE = 100;
-	private static int NUM_FOLDS = 2;
+	private static int NUMBER_OF_INSTANCE = 3000;
+	private static int NUM_FOLDS = 10;
 	
 	private Classifier[] onlineClassifiers = new Classifier[]{new WinnowClassifier(),new WinnowCollector()};
 	private Classifier[] offlineClassifiers = new Classifier[]{new SMO()};
@@ -76,6 +72,7 @@ public class ClassifierBenchComparator {
 			Instances filteredTestDataSet = preprocessor.convert(testDataSet);
 			Instances testInstances = new TestFilter(trainDataSet).revertInstances(filteredTestDataSet);
 			
+			System.out.println("Building "+classifier.getClass().getSimpleName()+" - instance: "+trainDataSet.numInstances());
 			classifier.buildClassifier(trainDataSet);
 			Evaluation e = new Evaluation(testInstances);
 			e.evaluateModel(classifier, testInstances);
@@ -96,6 +93,7 @@ public class ClassifierBenchComparator {
 		Evaluation e = null;
 		XYSeries result = new XYSeries(classifier.getClass().getSimpleName()+" corrected");
 		for (int i = 0; i <= NUM_FOLDS ; i++) {
+			System.out.println("Building "+classifier.getClass().getSimpleName()+" - instance: "+(i+1)*(trainDataSet.numInstances()/NUM_FOLDS));
 			classifier.buildClassifier(trainDataSet.trainCV(NUM_FOLDS, i));
 			e = new Evaluation(testInstances);
 			e.evaluateModel(classifier, testInstances);
@@ -106,7 +104,7 @@ public class ClassifierBenchComparator {
 			result.add(numInstance,correctlyClassified);
 //			printResult(e, "TEST VALIDATION: number of instances >>> "+numInstance+" <<<");
 		}
-		printResult(e, "TEST VALIDATION: number of instances >>> "+trainDataSet.numInstances()+" <<<");		
+//		printResult(e, "TEST VALIDATION: number of instances >>> "+trainDataSet.numInstances()+" <<<");		
 		return result;
 	}	
 	
