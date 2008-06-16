@@ -5,7 +5,6 @@ import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
 import ia2.preprocess.Preprocessor;
-import ia2.preprocess.TrecPreprocessor;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
