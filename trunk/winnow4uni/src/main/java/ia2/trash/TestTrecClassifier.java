@@ -1,4 +1,4 @@
-package ia2;
+package ia2.trash;
 import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;

@@ -1,4 +1,4 @@
-package ia2;
+package ia2.trash;
 
 import ia2.util.TrecParseAndConvert;
 

@@ -1,4 +1,4 @@
-package ia2;
+package ia2.trash;
 import ia2.winnow.WinnowClassifier;
 import ia2.winnow.weka.WinnowCollector;
 
