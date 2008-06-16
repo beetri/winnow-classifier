@@ -5,6 +5,7 @@ import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
 import ia2.preprocess.TrecPreprocessor;
+import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
 import java.io.FileReader;
@@ -15,16 +16,16 @@ import weka.core.Instances;
 
 public class Test_75_2 {
 	public static void main(String[] args) throws Exception {
-		System.setProperty("wordnet.database.dir","D:\\Software\\Installato\\Weka\\WordNet-3.0\\dict");
+		System.setProperty("wordnet.database.dir",Resource.getResourceFile("dict").getAbsolutePath());
 		
-		Parser parser = new TrecParser(new FileReader(getResourceFile("/train_5500.label")));
+		Parser parser = new TrecParser(new FileReader(getResourceFile("train_5500.label")));
 		Instances dataSet = parser.getDataSet();
 		Instances filteredDataSet = new TrecPreprocessor().convert(dataSet);
 //		System.exit(0);
 		
 		Instances testInstances = new TestFilter(filteredDataSet).revertInstances(new TrecPreprocessor().convert(
 										new TrecParser(
-												new FileReader(getResourceFile("/TREC_10.label"))
+												new FileReader(getResourceFile("TREC_10.label"))
 												).getDataSet()
 										)
 									);
