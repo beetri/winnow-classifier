@@ -1,0 +1,30 @@
+# Summary article for entire project (Question Classification and Winnow)
+
+= Abstract =
+
+In this paper we describe an implementation of the winnow algorithm for the problem of the question classification.
+
+
+= Introduction =
+
+What is Question Classification? Who know?
+
+ * QA
+ * QC
+ * online/offline
+
+= Descritpion of the classifier =
+
+Here some features
+
+= Experimental result =
+
+200% accuracy!
+
+= Conclusion =
+
+Don't ask us nothing!
+
+= References =
+
+we are our references!
