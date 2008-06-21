@@ -15,7 +15,7 @@ What is Question Classification? Who know?
  * online/offline
  * Mistake Bound Model
 
-= Descritpion of the classifier =
+= Description of the classifier =
 
 The classifier is conforms to the [http://weka.sourceforge.net/doc/weka/classifiers/Classifier.html WEKA Classifier Interface].
 The basic feature of the classifier are:
@@ -59,4 +59,4 @@ Don't ask us nothing!
  * [http://weka.sourceforge.net/doc/index.html WEKA JavaDoc]
  * Machine Learning - Tom Mitchell
  * Data Mining Practical - Machine Learning Tools And Techniques 2Ed - Ian Witten Eibe Frank
- * we ^^!
+ * we ^^
