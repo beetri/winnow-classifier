@@ -4,7 +4,6 @@
 
 In this paper we describe an implementation of the winnow algorithm for the problem of the question classification.
 
-
 = Introduction =
 
 What is Question Classification? Who know?
@@ -15,7 +14,10 @@ What is Question Classification? Who know?
 
 = Descritpion of the classifier =
 
-Here some features
+The classifier is conforms to the [http://weka.sourceforge.net/doc/weka/classifiers/Classifier.html WEKA Classifier Interface].
+The basic feature of the classifier are:
+ * Winnow based
+ * Online
 
 = Experimental result =
 
