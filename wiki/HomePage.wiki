@@ -48,5 +48,8 @@ To compare our classifier with the default [http://weka.sourceforge.net/doc/weka
 Don't ask us nothing!
 
 = References =
-
-we are our references!
+ * [http://www.cs.waikato.ac.nz/ml/weka/ WEKA Project Site]
+ * [http://weka.sourceforge.net/doc/index.html WEKA JavaDoc]
+ * Machine Learning - Tom Mitchell
+ * Data Mining Practical - Machine Learning Tools And Techniques 2Ed - Ian Witten Eibe Frank
+ * we ^^!
