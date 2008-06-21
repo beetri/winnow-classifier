@@ -11,12 +11,17 @@ The project's aim is to try the accuracy of a Winnow Based Algorithm in Question
 
 == Question Answering (QA) ==
 
-=== Why QA?===
+=== Why QA? ===
 Every people desire a system that could answer to generic question. Just thinking about our browsing session; how many time we search information from www.google.com, and how many time we found web page that doesn't contain the thing/information we are searching.
 Evidently the research tool we at our disposal can't satisfy the expectation.
 The huge goal of QA is answer to question that the user do in natural language.
 
-=== ===
+=== Manage the web Knowledge ===
+The web is a large source of information; comparing it to real life, is it like a big library. The problem of this huge library is that it are so big to become unaccessible for any reading.
+
+=== Problem of Question Answering ===
+A question answering system must resolve a lot of problem:
+ * Determinate the hidden concept/information of the subject that do the question (e.g. the location is important, just thinking about a question like "Where is <a city>?", probably are searching a city in the same nation where are)
 
 == Question Classification (QC) ==
 What is Question Classification? Who know?
