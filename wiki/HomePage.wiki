@@ -22,11 +22,11 @@ The basic feature of the classifier are:
  * Online
 
 == What is WEKA? ==
-WEKA is a powerfull and extensible DataMining tool written in Java. It offer a Command Line Interface CLI and a GUI for users, also it is a set of tools (in only one jar) for developers.
+WEKA is a powerful and extensible DataMining tool written in Java. It offer a Command Line Interface CLI and a GUI for users, it is also a set of tools (in only one jar) for developers.
 
-=== General Weka Classifier/Filter Structure ===
+=== General Weka Structure ===
 First of all we should have a general perspective of the Weka structure and of its feature.
-The simplest way to understand how Weka can read for nativelly .arff file that should a strict and human readable structure 
+Weka can read for natively .arff file, this file must contain the dataset to process, for example it can be the train dataset of our classifier. A .arff file should respect a strict and human readable structure, this can be viewed like a limitation but we can create a personalized parser which deals to build the Instances object. An Instances is an object that represent a dataset, independently of his data source representation (database, arff file, each other kind representation).
 
 == WinnowClassifier ==
 The structure of the classifier is the following;
