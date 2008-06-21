@@ -3,12 +3,22 @@ Work in progress
 
 = Abstract =
 
-In this paper we describe an implementation of the winnow algorithm for the problem of the question classification.
+In this paper we describe an implementation of the winnow algorithm for the question classification problem.
 The project's aim is to try the accuracy of a Winnow Based Algorithm in Question Classification Problem.
 
 
 = Introduction =
 
+== Question Answering (QA) ==
+
+=== Why QA?===
+Every people desire a system that could answer to generic question. Just thinking about our browsing session; how many time we search information from www.google.com, and how many time we found web page that doesn't contain the thing/information we are searching.
+Evidently the research tool we at our disposal can't satisfy the expectation.
+The huge goal of QA is answer to question that the user do in natural language.
+
+=== ===
+
+== Question Classification (QC) ==
 What is Question Classification? Who know?
  * QA
  * QC
