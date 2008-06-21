@@ -3,6 +3,8 @@
 = Abstract =
 
 In this paper we describe an implementation of the winnow algorithm for the problem of the question classification.
+The project's aim is to try the efficiency of a Winnow Based Algorithm in Question Classification Problem.
+
 
 = Introduction =
 
@@ -11,6 +13,7 @@ What is Question Classification? Who know?
  * QA
  * QC
  * online/offline
+ * Mistake Bound Model
 
 = Descritpion of the classifier =
 
@@ -18,10 +21,25 @@ The classifier is conforms to the [http://weka.sourceforge.net/doc/weka/classifi
 The basic feature of the classifier are:
  * Winnow based
  * Online
+The structure of the classifier is the following;
+the main class is named WinnowClassifier and perform all the feature of a WEKA Classifier.
+For respond to the prerequisite of the Question Classification problem the WinnowClassifier Class contains a map of SpecialistCollection object, respectively, one for each category to classify.
+A SpecialistCollection is conceptually a set of Specialist that collaborate to classify the instances. The SpecialistCollection makes a positive or negative prediction, that is based on the weights sum of the specialists contained in it.
+Th Specialist object contained in the SpecialistCollection, have a weight that raise or decrease every time the prediction is wrong. 
+
 
 = Experimental result =
 
-200% accuracy!
+All the test are made on macro category of:
+ * train_5500.label on training and cross validation
+ * TREC_10.label on test validation
+To compare our classifier with the default [http://weka.sourceforge.net/doc/weka/classifiers/functions/Winnow.html "winnow Weka"]we have should build a wrapper that encapsulate six instance of the Weka classifier, on for each macro category, this because the winnow algorithm can classify only one category at a time.
+
+== Winnow Weka Collector vs Winnow Classifier ==
+~75%
+
+=== Winnow Weka Collector vs Winnow Classifier with more Filter ===
+~80%
 
 = Conclusion =
 
