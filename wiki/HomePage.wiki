@@ -48,7 +48,7 @@ Weka can read for natively .arff file, this file must contain the dataset to pro
 The structure of the classifier is the following;
 the main class is named WinnowClassifier and perform all the feature of a WEKA Classifier.
 To satisfy the prerequisite of the Question Classification problem the WinnowClassifier class contains a map of SpecialistCollection object, respectively, one for each category to classify.
-A SpecialistCollection is conceptually a set of Specialist that collaborate to classify the instances. The SpecialistCollection makes a positive or negative prediction, that is based on the weights sum of the specialists contained in it.
+A SpecialistCollection is conceptually a set of Specialist that collaborate to classify the instances. The SpecialistCollection makes a positive or negative prediction, that is based on the sum's weights of the specialists contained in it.
 The Specialist object contained in the SpecialistCollection, have a weight that raise or decrease every time the prediction is wrong. On positive prediction we decrease the weights of the Specialists, vice versa on negative prediction we decrease the weights.
 
 
