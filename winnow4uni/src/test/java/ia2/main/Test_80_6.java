@@ -1,6 +1,6 @@
 package ia2.main;
 
-import static ia2.util.Resource.getResourceFile;
+import static ia2.util.Resource.getResourceAsStream;
 import ia2.freezedclassifierAndTools.TrecPreprocessor_80_6;
 import ia2.parse.Parser;
 import ia2.parse.TestFilter;
@@ -8,31 +8,29 @@ import ia2.parse.TrecParser;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
-import java.io.FileReader;
+import java.io.File;
+import java.io.InputStreamReader;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 
-
 public class Test_80_6 {
-	
 	public static void main(String[] args) throws Exception {
-		System.setProperty("wordnet.database.dir",Resource.getResourceFile("dict").getAbsolutePath());
-		
-		Parser parser = new TrecParser(new FileReader(getResourceFile("train_5500.label")));
+		try {
+			System.setProperty("wordnet.database.dir",Resource.getResourceFile("dict").getAbsolutePath());
+		} catch (IllegalArgumentException e ) {
+			System.setProperty("wordnet.database.dir",new File("").getAbsolutePath() + File.separatorChar + "dict");
+		}
+		Parser parser = new TrecParser(new InputStreamReader(getResourceAsStream("train_5500.label")));
 		Instances dataSet = parser.getDataSet();
 		Instances filteredDataSet = new TrecPreprocessor_80_6().convert(dataSet);
-//		System.exit(0);
-		
 		Instances testInstances = new TestFilter(filteredDataSet).revertInstances(new TrecPreprocessor_80_6().convert(
 										new TrecParser(
-												new FileReader(getResourceFile("TREC_10.label"))
+												new InputStreamReader(getResourceAsStream("TREC_10.label"))
 												).getDataSet()
 										)
 									);
-//		System.exit(0);
-//		System.out.println(filteredDataSet);
 		Evaluation e = new Evaluation(filteredDataSet);
 		Classifier classifier = new WinnowClassifier();
 		classifier.buildClassifier(filteredDataSet);
@@ -51,5 +49,4 @@ public class Test_80_6 {
 		System.out.println(e.toClassDetailsString());
 		
 	}
-
 }
