@@ -27,29 +27,6 @@ public class TestFilter {
 		}
 		return resultDataSet;
 	}
-
-	@SuppressWarnings("unchecked")
-	private Instance createInstanceQuasiBase(Instances newDataSet, Instance testInstance) {
-		Instance resultInstance = new Instance(newDataSet.numAttributes());//TODO accoppiato con il numero di attributo
-//		Instance resultInstance = new Instance(oldInstance.weight(),new double[newDataSet.numAttributes()]);
-		resultInstance.setDataset(newDataSet);
-		
-		String classValue = testInstance.classAttribute().value((int)testInstance.classValue());
-		resultInstance.setClassValue(classValue);
-
-		final Enumeration<Attribute> attributes = testInstance.enumerateAttributes();
-		while (attributes.hasMoreElements()) {
-			Attribute attribute = (Attribute) attributes.nextElement();
-			Attribute destination = newDataSet.attribute(attribute.name());
-			if(destination == null)
-				continue;
-			double value = testInstance.value(attribute);
-			if(value!=0)
-				resultInstance.setValue(destination.index(),value);
-		}
-		resultInstance.replaceMissingValues(this.azzeratore);
-		return resultInstance;
-	}
 	
 	private Instance createInstance(Instances newDataSet, Instance oldInstance) {
 //		Instance resultInstance = new Instance(newDataSet.numAttributes());//TODO accoppiato con il numero di attributo

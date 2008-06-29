@@ -7,7 +7,6 @@ import ia2.parse.TrecParser;
 import ia2.preprocess.TrecPreprocessor;
 import ia2.winnow.WinnowClassifier;
 
-import java.io.File;
 import java.io.InputStreamReader;
 
 import weka.classifiers.Classifier;
