@@ -18,7 +18,7 @@ public class TrecParser implements Parser {
 	private static final int DEFAULT_NUMBER_OF_INSTANCE = 6000;	
 	private static final String DEFAULT_DATASET_NAME = "default dataset";
 		
-	private BufferedReader bufferedReader;
+	private final BufferedReader bufferedReader;
 	
 	public TrecParser(InputStream inputStream) {
 		this(new InputStreamReader(inputStream));
@@ -70,5 +70,6 @@ public class TrecParser implements Parser {
 			Instance instance = readInstance(newLine,dataSet);
 			dataSet.add(instance);
 		}
+		bufferedReader.close();
 	}
 }
