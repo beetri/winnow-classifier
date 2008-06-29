@@ -108,6 +108,7 @@ public class ClassifierBenchComparator {
 		return result;
 	}	
 	
+	@SuppressWarnings("unused")
 	private static void printResult(Evaluation e,String title) throws Exception {
 		System.out.println("RISULTATO "+title);
 		System.out.println(e.toSummaryString());	

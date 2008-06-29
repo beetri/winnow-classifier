@@ -6,6 +6,7 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public class StopWordEliminator {
 	
+	@SuppressWarnings("unused")
 	private static String[] stopWordsArray = new String[] {
 //															"I", 
 														/*	"a",	"about",	"an",	"are", "as", */"at",
@@ -23,6 +24,7 @@ public class StopWordEliminator {
 //															"und",
 //															"www"
 															};
+	@SuppressWarnings("unused")
 	private static String[] allStopWordsArray = new String[] {
 															"I", 
 															"a",	"about",	"an",	"are", "as", "at",
