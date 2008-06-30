@@ -1,10 +1,10 @@
 package ia2;
 
-import ia2.freezedclassifierAndTools.TrecPreprocessor_80_6;
 import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
 import ia2.preprocess.Preprocessor;
+import ia2.preprocess.FreezedTrecPreprocessor_80_6;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 import ia2.winnow.weka.WinnowCollector;
@@ -39,7 +39,7 @@ public class ClassifierBenchComparator {
 	
 	private Classifier[] onlineClassifiers = new Classifier[]{new WinnowClassifier(),new WinnowCollector()};
 	private Classifier[] offlineClassifiers = new Classifier[]{new SMO()};
-	private Preprocessor preprocessor = new TrecPreprocessor_80_6();
+	private Preprocessor preprocessor = new FreezedTrecPreprocessor_80_6();
 
 	public static void main(String[] args) throws Exception {
 		System.setProperty("wordnet.database.dir",Resource.getResourceFile("dict").getAbsolutePath());	

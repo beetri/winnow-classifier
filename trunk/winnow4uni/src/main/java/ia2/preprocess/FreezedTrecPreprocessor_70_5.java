@@ -1,4 +1,4 @@
-package ia2.freezedclassifierAndTools;
+package ia2.preprocess;
 
 import static ia2.util.TrecCommons.createInstance;
 import static ia2.util.TrecCommons.getAttributesFastVector;
@@ -15,7 +15,7 @@ import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.SynsetType;
 import edu.smu.tspell.wordnet.WordNetDatabase;
 
-public class FullOfThingTrecFilter extends TrecFilter {
+public class FreezedTrecPreprocessor_70_5 extends TrecFilter {
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -47,7 +47,7 @@ public class FullOfThingTrecFilter extends TrecFilter {
 	
 	private WordNetDatabase wnDB;
 	
-	public FullOfThingTrecFilter() throws Exception {
+	public FreezedTrecPreprocessor_70_5() throws Exception {
 		wekaStemmer = new SnowballStemmer();
 		wnDB = WordNetDatabase.getFileInstance();
 	}

@@ -1,7 +1,5 @@
-package ia2.freezedclassifierAndTools;
+package ia2.preprocess;
 
-import ia2.preprocess.Preprocessor;
-import ia2.preprocess.PreprocessorException;
 import ia2.preprocess.filter.TrecFilter;
 import weka.core.Instances;
 import weka.filters.Filter;
@@ -9,7 +7,7 @@ import weka.filters.unsupervised.attribute.NumericToNominal;
 import weka.filters.unsupervised.attribute.Reorder;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 
-public class TrecPreprocessor_80_6 implements Preprocessor {
+public class FreezedTrecPreprocessor_80_6 implements Preprocessor {
 
 	/*
 	 * (non-Javadoc)
@@ -31,7 +29,7 @@ public class TrecPreprocessor_80_6 implements Preprocessor {
 		// TrecWekaFilter trecFilter = new TrecWekaFilter();
 		// trecFilter.setInputFormat(inputDataSet);
 		// inputDataSet = Filter.useFilter(inputDataSet, trecFilter);
-		TrecFilter trecFilter = new FullOfThingTrecFilter();
+		TrecFilter trecFilter = new FreezedTrecPreprocessor_70_5();
 		inputDataSet = trecFilter.filter(inputDataSet);
 
 		// TODO: filtro coppia++
