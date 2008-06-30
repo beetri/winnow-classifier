@@ -1,10 +1,10 @@
 package ia2.main;
 
 import static ia2.util.Resource.getResourceAsStream;
-import ia2.freezedclassifierAndTools.TrecPreprocessor_80_6;
 import ia2.parse.Parser;
 import ia2.parse.TestFilter;
 import ia2.parse.TrecParser;
+import ia2.preprocess.FreezedTrecPreprocessor_80_6;
 import ia2.util.Resource;
 import ia2.winnow.WinnowClassifier;
 
@@ -24,8 +24,8 @@ public class Test_80_6 {
 		}
 		Parser parser = new TrecParser(new InputStreamReader(getResourceAsStream("train_5500.label")));
 		Instances dataSet = parser.getDataSet();
-		Instances filteredDataSet = new TrecPreprocessor_80_6().convert(dataSet);
-		Instances testInstances = new TestFilter(filteredDataSet).revertInstances(new TrecPreprocessor_80_6().convert(
+		Instances filteredDataSet = new FreezedTrecPreprocessor_80_6().convert(dataSet);
+		Instances testInstances = new TestFilter(filteredDataSet).revertInstances(new FreezedTrecPreprocessor_80_6().convert(
 										new TrecParser(
 												new InputStreamReader(getResourceAsStream("TREC_10.label"))
 												).getDataSet()
