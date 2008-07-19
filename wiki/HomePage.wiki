@@ -1,6 +1,8 @@
 # Summary article for entire project (Question Classification and Winnow)
 Work in progress
 
+__TOC__
+
 = Abstract =
 
 In this paper we describe an implementation of the winnow algorithm for the question classification problem.
