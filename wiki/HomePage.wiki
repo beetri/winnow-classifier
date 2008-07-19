@@ -1,7 +1,6 @@
 # Summary article for entire project (Question Classification and Winnow)
 Work in progress
 
-__TOC__
 
 = Abstract =
 
