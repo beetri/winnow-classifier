@@ -18,7 +18,7 @@ Evidently the research tool we at our disposal can't satisfy the expectation.
 The huge goal of QA is answer to question that the user do in natural language.
 
 === Manage the web Knowledge ===
-The web is a large source of information; comparing it to real life, is it like a big library. The problem of this huge library is that it are so big to become unaccessible for any reading.
+The web is a large source of information; comparing it to real life, is it like a big library. The problem of this huge library is that it is so big to become unaccessible for any reading.
 
 === Problem of Question Answering ===
 A question answering system must resolve a lot of problem:
