@@ -1,0 +1,2 @@
+Qui si descrivono le combinazioni:
+Utilizzando WekaClassifire con il TrecPreprocessor che utilizza il FullOfThingTrecFilter 80,6

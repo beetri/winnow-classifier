@@ -47,7 +47,7 @@ public class MockClassifier extends Classifier {
 	@Override
 	public double[] distributionForInstance(Instance instance) throws Exception {
 		int numClasses = instance.numClasses();
-		double[] a = new double[numClasses]; 
+		double[] a = new double[numClasses];
 		a[r.nextInt(numClasses)] = 1;
 //		a[1] = a[2] = 1;
 		return a;
