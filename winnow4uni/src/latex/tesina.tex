@@ -36,11 +36,11 @@ di produrre un intero documento di testo probabilmente molto lungo.
 Un sistema di QA \'e generalmente costituito da 4 moduli:
 \begin{description}
 	\item[Question Classifier] ha il compito di classificare la domanda in categorie 
-	prestabilite.
+	prestabilite;
 	\item[Search Engine] basando sulla categoria prodotta dal modulo precedente, ricerca 
-	i documenti che hanno probabilit\'a pi\'u alta di contenere la risposta.
+	i documenti che hanno probabilit\'a pi\'u alta di contenere la risposta;
 	\item[Text Filter] individua le parti di testo all'interno dei documenti, che potrebbero 
-	contenere la risposta.
+	contenere la risposta;
 	\item[Answer Extractor] deduce la risposta dalle parti di testo individuate dal modulo 
 	precedente, e le presenta in linguaggio naturale all'utente del sistema.
 \end{description}
@@ -50,8 +50,8 @@ Il processo di QC ha quindi il compito di assegnare particolari categorie alle d
 di risposta che la domanda rappresenta. Per classificare le domande, o pi\'u in generale del test, 
 \'e necessario prendere in considerazione due aspetti basilari \cite{brown}:
 \begin{itemize}
-	\item i tipi delle risposte, le categorie
-	\item un insieme di regole di classificazione
+	\item i tipi delle risposte, le categorie;
+	\item un insieme di regole di classificazione.
 \end{itemize}
  
 \subsubsection{Answer Types}
@@ -68,23 +68,23 @@ di dettaglio. Tra i tipi di risposte pi\'u famoss troviamo:
 \begin{itemize}
 	\item Xin Li e Dan Roth, che propongono una suddivisione in 50 sotto categorie e 6 macro categorie \cite{XinLi}:	
 	\begin{itemize}
-		\item Abbreviation
-		\item Entity
-		\item Description
-		\item Human
-		\item Location
+		\item Abbreviation;
+		\item Entity;
+		\item Description;
+		\item Human;
+		\item Location;
 		\item Numerical Value.
 	\end{itemize}
 	\item Webclopedia, che usa oltre 140 tipi di risposte, anche chiamati qtargets. Questi sono raggruppati in 
 	8 macro categorie \cite{gerber}:	
 	\begin{enumerate}
-		\item relational qtargets
-		\item abstract qtargets
-		\item semantic qtargets
-		\item syntactic qtargets
-		\item role qtargets
-		\item slot qtargets
-		\item lexical qtargets
+		\item relational qtargets;
+		\item abstract qtargets;
+		\item semantic qtargets;
+		\item syntactic qtargets;
+		\item role qtargets;
+		\item slot qtargets;
+		\item lexical qtargets;
 		\item combinations of other qtargets.
 	\end{enumerate}
 \end{itemize}
@@ -96,9 +96,9 @@ Esistono diverse strategie/regole di classificazione:
 sono le prime tecniche utilizzate per la 
 question classification, ma hanno dei grossi limiti, sebbene abbiano avuto successo \cite{brown}:
 \begin{itemize}
-	\item in primo luogo tali tecniche richiedono molto tempo, poich\'e sono scritte a mano
-	\item in secondo luogo sono poco evolvibili, con il cambiare delle categorie
-	\item se cambiamo l'insieme delle categorie, tutte le regole devono essere riscritte
+	\item in primo luogo tali tecniche richiedono molto tempo, poich\'e sono scritte a mano;
+	\item in secondo luogo sono poco evolvibili, con il cambiare delle categorie;
+	\item se cambiamo l'insieme delle categorie, tutte le regole devono essere riscritte;
 	\item infine sono molto difficili da scrivere, soprattutto quando si usano tante categorie 
 	a grana fine.
 \end{itemize}
@@ -131,8 +131,9 @@ I classificatori si disinguono in due grosse macrocategorie:
 \end{enumerate}
 le due categorie si distinguono soprattuto per prestazioni, tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
-Un classificatore OffLine deve essere addestrato da un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non puo' più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine per cos\'i dire impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del calssificatore.
+Un classificatore OffLine deve essere addestrato da un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non puo' più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine, per cos\'i dire, impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del calssificatore.
 All'apparenza un classificatore OnLine offre pi\'u vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore OnLine \'e tipicamente peggiore di un classificatore OffLine.
+
 
 \subsection{On-Line Algorithm}
 abbiamo scelto on-line algoritmo perchè...
@@ -142,10 +143,10 @@ in particolare usiamo winnow...
 
 alcune citazione: le ho scritte per non scordarmele!
 
-"winnow \'e adatto in teoria per problemi con molti attributi irrilevanti" \cite{Zhang}
+``winnow \'e adatto in teoria per problemi con molti attributi irrilevanti'' \cite{Zhang}
 
-"winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa propriet\'a sembra cruciale in problemi nei quali il numero di feature potenziali \'e vasto 
-ma solo poche sono rilevanti" \cite{snow}
+``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa propriet\'a sembra cruciale in problemi nei quali il numero di feature potenziali \'e vasto 
+ma solo poche sono rilevanti'' \cite{snow}
 
 \section{Pre-Processing - Feature Extraction}
 
