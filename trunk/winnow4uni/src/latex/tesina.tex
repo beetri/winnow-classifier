@@ -137,14 +137,14 @@ All'apparenza un classificatore OnLine offre pi\'u vantaggi ma come spesso accad
 
 \subsection{On-Line Algorithm}
 Adesso che abbiamo una conoscenza generale delle differenze tra le due classi di algoritmi dobbiamo scegliere quale delle due adottare. Passiamo quindi all'analisi del nostro dominio di interesse, cio\'e la question classification; quest'ultima appartiene ad un dominio intrinsecamente variabile, ambiguo e soprattuto variabile nel tempo. La QA \'e variabile nel tempo perch\'e i significati di una parola sono molteplici e possono variare nel tempo, un caso esemplificativo ed evidente e' la parola ``laico'' nella nostra lingua dove fino a pochisimo tempo fa stava ad indicare la non appartenenza all'ecclesia mentre ora ha in pratica preso il significato di ``ateo'' e/o ``agnostico'' (una variazione di significato non indifferente).
+Poich\'e il nostro dominio e' fortemente suscettibile alle variazioni del constesto nel quale si trova e poich\'e l'applicabilita' degli algoritmi OffLine e' stata studiata approfinditamente in molti lavori %inserire riferimento%
+la scelta ricade sugli algoritmi OnLine.
 
 \subsection{Winnow}
-in particolare usiamo winnow...
-
-alcune citazione: le ho scritte per non scordarmele!
-
-``winnow \'e adatto in teoria per problemi con molti attributi irrilevanti'' \cite{Zhang}
-
+Avendo scelto di utiilizzare un algoritmo OnLine dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
+%per ora chiudo veloce ma qui referenze facili%
+Tra gli algoritmi OnLine la scelta ricade in particolare sull'algoritmo di Winnow.
+Questo algoritmo ha delle tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow \'e adatto in teoria per problemi con molti attributi irrilevanti'' \cite{Zhang}) e 
 ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa propriet\'a sembra cruciale in problemi nei quali il numero di feature potenziali \'e vasto 
 ma solo poche sono rilevanti'' \cite{snow}
 
