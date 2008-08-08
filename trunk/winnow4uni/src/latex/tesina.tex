@@ -119,11 +119,20 @@ si possono utilizzare altri insiemi di feature oltre alle semplici parole, come 
 
 
 \section{Our Scope: Machine Learning}
-Sebbene sia possibile costruire classificatori con regole euristiche scritte ad hoc, tale approccio 
-richiede un'enorme quantit\'a di tempo e di noioso lavoro. Con il machine learning \'e invece possibile 
-costruire classificatori con alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
+Sebbene sia possibile create classificatori con regole euristiche costruite ad hoc, tale approccio 
+richiede un'enorme quantit\'a di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
+Utilizzando tecniche di machine learning \'e al contrario \'e possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
 approccio \'e pi\'u flessibile e si adatta facilmente a nuove categorie \cite{Zhang}. Ed \'e questo 
 l'approccio che intendiamo usare per il nostro classificatore.
+I classificatori si disinguono in due grosse macrocategorie:
+\begin{enumerate}
+	\item OffLine;
+	\item OnLine.
+\end{enumerate}
+le due categorie si distinguono soprattuto per prestazioni, tempo di addestramento, flessibilità e conseguentemente per algoritmo.
+
+Un classificatore OffLine deve essere addestrato da un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non puo' più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine per cos\'i dire impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del calssificatore.
+All'apparenza un classificatore OnLine offre pi\'u vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore OnLine \'e tipicamente peggiore di un classificatore OffLine.
 
 \subsection{On-Line Algorithm}
 abbiamo scelto on-line algoritmo perchè...
