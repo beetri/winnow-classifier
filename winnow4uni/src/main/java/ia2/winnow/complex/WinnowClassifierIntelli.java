@@ -1,9 +1,9 @@
-package ia2.winnow;
+package ia2.winnow.complex;
 
 
-import static ia2.winnow.Constants.NEGATIVE;
-import static ia2.winnow.Constants.POSITIVE;
+import ia2.winnow.WinnowUtil;
 
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,18 +15,20 @@ import weka.core.Instances;
 import weka.core.NoSupportForMissingValuesException;
 import weka.core.UnsupportedAttributeTypeException;
 import weka.core.UnsupportedClassTypeException;
+import static ia2.winnow.Constants.POSITIVE;
+import static ia2.winnow.Constants.NEGATIVE;
 
-public class WinnowClassifier extends Classifier {
+public class WinnowClassifierIntelli extends Classifier {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 91692613691906964L;
 	
-	private Map<Integer,SpecialistCollection> class2SpecialistCollection; 
+	private Map<Integer,SpecialistCollectionIntelli> class2SpecialistCollection; 
 	
-	public WinnowClassifier() {
-		this.class2SpecialistCollection = new HashMap<Integer, SpecialistCollection> ();		
+	public WinnowClassifierIntelli() {
+		this.class2SpecialistCollection = new HashMap<Integer, SpecialistCollectionIntelli> ();		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -58,7 +60,7 @@ public class WinnowClassifier extends Classifier {
 	}
 	
 	private double classifyInstanceForClass(int classValue, int[] notZeroAttributeIndex){
-		SpecialistCollection specialistCollection =  this.getSpecialistCollectionForClass(classValue);//non invoco il metodo getSpecialist perchè non devo creare una nuova categoria qui
+		SpecialistCollectionIntelli specialistCollection =  this.getSpecialistCollectionForClass(classValue);//non invoco il metodo getSpecialist perchè non devo creare una nuova categoria qui
 		return specialistCollection.getPrediction(notZeroAttributeIndex);
 	}
 	
@@ -79,11 +81,10 @@ public class WinnowClassifier extends Classifier {
 //			if(classificationResult == POSITIVE && classValue == i
 //					||														// condizione che corrisponde a quando ho predetto correttamente lascio per completezza
 //			classificationResult == NEGATIVE && classValue != i)
-			if(classificationResult == POSITIVE && classValue != i) // predico positivo quando non lo è
+			if(classificationResult >= POSITIVE && classValue != i) // predico positivo quando non lo è
 				this.class2SpecialistCollection.get(i).decreaseWeight(specialistIndex);
-			else if(classificationResult == NEGATIVE && classValue == i)	///predico negativo quando non lo è
+			else if(classificationResult < POSITIVE && classValue == i)	///predico negativo quando non lo è
 				this.class2SpecialistCollection.get(i).raiseWeight(specialistIndex);
-		
 		/* normalizzato ma illeggibile decommentare in produzione :)*/
 //			if(classValue==i) {
 //				if(classificationResult == NEGATIVE)
@@ -93,10 +94,10 @@ public class WinnowClassifier extends Classifier {
 		}
 	}
 
-	private SpecialistCollection getSpecialistCollectionForClass(int classValue) {
-		SpecialistCollection specialistCollection = this.class2SpecialistCollection.get(classValue);
+	private SpecialistCollectionIntelli getSpecialistCollectionForClass(int classValue) {
+		SpecialistCollectionIntelli specialistCollection = this.class2SpecialistCollection.get(classValue);
 		if(specialistCollection == null){
-			specialistCollection = new SpecialistCollection();
+			specialistCollection = new SpecialistCollectionIntelli();
 			class2SpecialistCollection.put(classValue, specialistCollection);
 		}
 		return specialistCollection;
@@ -113,7 +114,7 @@ public class WinnowClassifier extends Classifier {
 	}
 	
 	private double classifyInstanceForClass(Instance instance, int classValue){
-		SpecialistCollection specialistCollection =  this.getSpecialistCollectionForClass(classValue);//non invoco il metodo getSpecialist perchè non devo creare una nuova categoria qui
+		SpecialistCollectionIntelli specialistCollection =  this.getSpecialistCollectionForClass(classValue);//non invoco il metodo getSpecialist perchè non devo creare una nuova categoria qui
 		return specialistCollection.getPrediction(instance);
 	}
 
