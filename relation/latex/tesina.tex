@@ -186,14 +186,14 @@ Il dominio di nostro interesse è composto da domande, le quali per loro propria 
 L'obiettivo del preprocessing è arricchire le informazioni così da averne poi un beneficio diretto sul processo di classificazione immediatamente successivo.
 
 Le nostre feature hanno lo scopo di:
-\begin{enumerable}
+\begin{enumerate}
 	\item Tener conto in qualche modo dell'ordine delle parole;
 	\item Tener conto del valore semantico delle parole.
-\end{enumerable}
+\end{enumerate}
 Per soddisfare questi obiettivi sono state aggiunti nuovi elementi creati dalla giustapposizione delle parole presenti nelle domande.
 
-Ad esempio se una domanda è nella forma ``What is the fire?'' a tale domanda veien
-
+Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
+È semplice vedere come soprattuto la prima composizione (i.e. ``What\_is'') sia di notevole interesse poiché.
 
 
 \section{Experimental Set-Up}
