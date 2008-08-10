@@ -18,7 +18,7 @@
 questo lo scrivo alla fine! farò un brevissimo riassunto, niente di particolare.
 Però tanto per anticipare quello di cui parliamo è la QC e l'implementazione fatta da noi è 
 winnow, un algoritmo on-line.
-etc...
+etc~\ldots\ 
 \end{abstract}
 
 \section{Introduction}
@@ -33,7 +33,7 @@ necessaria all'utente.
 \subsection{Question Answering}
 Il Question Answering è una variazione dell'information retrieval (IR): 
 mentre l'IR è orientata ai documenti, il QA ricerca specifiche informazioni all'interno dei documenti 
-cercando di fornire direttamente la risposta all'information need dell'utente \cite{WeiLi}. Ed è quindi 
+cercando di fornire direttamente la risposta all'information need dell'utente~\cite{WeiLi}. Ed è quindi 
 un compito più difficile rispetto all'IR, poiché fornire una risposta precisa e concisa è più complesso 
 di produrre un intero documento di testo probabilmente molto lungo.
 Un sistema di QA è generalmente costituito da 4 moduli:
@@ -70,7 +70,7 @@ di categorie migliori: i sistemi attuali solitamente prevedono
 una divisione in 6-7 categorie a grana grossa, e una successiva suddivisione di ogni categoria in altrettante 
 di dettaglio. Tra i tipi di risposte più famosi troviamo:
 \begin{itemize}
-	\item Xin Li e Dan Roth, che propongono una suddivisione in 50 sotto categorie e 6 macro categorie \cite{XinLi}:	
+	\item Xin Li e Dan Roth, che propongono una suddivisione in 50 sotto categorie e 6 macro categorie~\cite{XinLi}:	
 	\begin{itemize}
 		\item Abbreviation;
 		\item Entity;
@@ -80,7 +80,7 @@ di dettaglio. Tra i tipi di risposte più famosi troviamo:
 		\item Numerical Value.
 	\end{itemize}
 	\item Webclopedia, che usa oltre 140 tipi di risposte, anche chiamati qtargets. Questi sono raggruppati in 
-	8 macro categorie \cite{gerber}:	
+	8 macro categorie~\cite{gerber}:	
 	\begin{enumerate}
 		\item relational qtargets;
 		\item abstract qtargets;
@@ -109,9 +109,9 @@ Non è un caso, infatti, che tali sistemi utilizzino meno di dieci categorie.
 
 \paragraph{Machine Learning Algorithm}
 L'algoritmo più utilizzato in questo campo è SVM, support vector machine. Un'altra architettura 
-molto usata è SNoW \cite{XinLi}. La precision di tali algoritmi, utlizzando solo le parole delle 
+molto usata è SNoW~\cite{XinLi}. La precision di tali algoritmi, utlizzando solo le parole delle 
 domande, si aggira sul 50\%. Ma si possono utilizzare molte altre feature oltre alle 
-semplici parole, come ad esempio: le named entity, head chunk etc\ldots
+semplici parole, come ad esempio: le named entity, head chunk etc~\ldots\ 
 
 \paragraph{Language Modeling} 
 Un altro metodo, sempre probabilistico come il machine learning, è il language modeling.
@@ -125,7 +125,7 @@ si possono utilizzare altri insiemi di feature oltre alle semplici parole, come 
 Sebbene sia possibile create classificatori con regole euristiche costruite ad hoc, tale approccio 
 richiede un'enorme quantità di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
 Utilizzando tecniche di machine learning è al contrario è possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
-approccio è più flessibile e si adatta facilmente a nuove categorie \cite{Zhang}. Ed è questo 
+approccio è più flessibile e si adatta facilmente a nuove categorie~\cite{Zhang}. Ed è questo 
 l'approccio che intendiamo usare per il nostro classificatore.
 I classificatori si distinguono in due grosse macrocategorie:
 \begin{enumerate}
@@ -135,7 +135,7 @@ I classificatori si distinguono in due grosse macrocategorie:
 le due categorie si distinguono soprattutto per prestazioni, tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
 Un classificatore OffLine deve essere addestrato da un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non può più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine, per così dire, impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del classificatore.
-All'apparenza un classificatore OnLine offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore OnLine \'e tipicamente peggiore di un classificatore OffLine.
+All'apparenza un classificatore OnLine offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore OnLine è tipicamente peggiore di un classificatore OffLine.
 
 
 \subsection{On-Line Algorithm}
@@ -149,7 +149,7 @@ Avendo scelto di utilizzare un algoritmo OnLine dobbiamo decidere quale algoritm
 Tra gli algoritmi OnLine la scelta ricade in particolare sull'algoritmo di Winnow.
 Questo algoritmo ha delle qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow \'e adatto in teoria per problemi con molti attributi irrilevanti'' \cite{Zhang}) e 
 ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto 
-ma solo poche sono rilevanti'' \cite{snow}.
+ma solo poche sono rilevanti''~\cite{snow}.
 
 \section{Winnow Project}
 Il progetto di un nostro classificatore avrà la seguente architettura:
