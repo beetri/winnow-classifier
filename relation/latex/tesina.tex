@@ -47,7 +47,8 @@ Un sistema di QA è generalmente costituito da 4 moduli:
 	\item[Answer Extractor] deduce la risposta dalle parti di testo individuate dal modulo 
 	precedente, e le presenta in linguaggio naturale all'utente del sistema.
 \end{description}
-%disegno%
+% disegno %
+
 
 \subsection{Question Classification}
 Il processo di QC ha quindi il compito di assegnare particolari categorie alle domande, basandosi sul tipo 
@@ -185,26 +186,33 @@ L'aggiunta delle feature è un punto delicato di un sistema di classificazione e 
 Il dominio di nostro interesse è composto da domande, le quali per loro propria natura sono ``compattate'' in media in una certa finestra di lunghezza comunque molto piccola.
 L'obiettivo del preprocessing è arricchire le informazioni così da averne poi un beneficio diretto sul processo di classificazione immediatamente successivo.
 
-Le nostre feature hanno lo scopo di:
+Le nostre feature hanno lo scopo di prende in considerazione:
 \begin{enumerate}
-	\item Tener conto in qualche modo dell'ordine delle parole;
-	\item Tener conto del valore semantico delle parole.
+	\item L'ordine delle parole;
+	\item Il valore semantico delle parole.
 \end{enumerate}
-Per soddisfare questi obiettivi sono state aggiunti nuovi elementi creati dalla giustapposizione delle parole presenti nelle domande.
+La tecnica che si è adottata per soddisfare questi obiettivi è stata quella di aggiungere alla domanda nuovi elementi, ad esempio quelli ottenuti dalla giustapposizione delle parole presenti nelle domanda stessa.
 
 Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottenendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
 È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevolmente importante nella categorizzazione delle domande.
 
-Con la tecnica sopra descritta sono state agiunte le segueni feature:
+Con la tecnica sopra descritta sono state aggiunte le segueni feature:
 \begin{enumerate}
 	\item Relazioni tra le parole sia a coppie che a triple;
-	\item Parole ``stemmate'' (e non), nel dettaglio tramite lo ``Snowball Stemmer'' ed un altro rudimentale sviluppato da noi;
+	\item Parole ``stemmate'' (lasciando anche quelle non originali), nel dettaglio tramite lo ``Snowball Stemmer'' ed un altro rudimentale sviluppato da noi;
 	\item Relazione tra la prima parola della domanda e l'ultima;
-	\item Utilizzo di WordNet per la derivazione del tipo di parola. % Referenza su wordnet %
+	\item Utilizzo di WordNet per la derivazione del tipo sintattico della parola ed in più la giustapposizione dei tipi sintattici per coppie e per triple. % Referenza su wordnet %
 \end{enumerate}
 
 
 \section{Experimental Set-Up}
+Gli strumenti utilizzati per fare gli esperimenti sono:
+\begin{itemize}
+	\item WEKA
+	\item SnowballStemmer 
+	\item WordNet
+	\item[Per la creazione dei grafici di risultato] JFreechart
+\end{itemize}
 
 \subsection{WEKA Winnow Classifier}
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
