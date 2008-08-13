@@ -193,7 +193,15 @@ Le nostre feature hanno lo scopo di:
 Per soddisfare questi obiettivi sono state aggiunti nuovi elementi creati dalla giustapposizione delle parole presenti nelle domande.
 
 Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottenendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
-È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevole interesse poiché.
+È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevolmente importante nella categorizzazione delle domande.
+
+Con la tecnica sopra descritta sono state agiunte le segueni feature:
+\begin{enumerate}
+	\item Relazioni tra le parole sia a coppie che a triple;
+	\item Parole ``stemmate'' (e non), nel dettaglio tramite lo ``Snowball Stemmer'' ed un altro rudimentale sviluppato da noi;
+	\item Relazione tra la prima parola della domanda e l'ultima;
+	\item Utilizzo di WordNet per la derivazione del tipo di parola. % Referenza su wordnet %
+\end{enumerate}
 
 
 \section{Experimental Set-Up}
