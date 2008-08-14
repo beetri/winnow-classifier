@@ -135,12 +135,14 @@ I classificatori si distinguono in due grosse macrocategorie:
 \end{enumerate}
 le due categorie si distinguono soprattutto per prestazioni, tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
-Un classificatore OffLine deve essere addestrato da un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non può più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine, per così dire, impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del classificatore.
+Un classificatore OffLine deve essere addestrato su un insieme di input (insieme di training) e solo dopo questa operazione può essere utilizzato per classificare ma non può più in essere riaddestrato se non ricompiendo un addestramento completo. Al contrario un algoritmo OnLine, per così dire, impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del classificatore.
 All'apparenza un classificatore OnLine offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore OnLine è tipicamente peggiore di un classificatore OffLine.
 
 
 \subsection{On-Line Algorithm}
-Adesso che abbiamo una conoscenza generale delle differenze tra le due classi di algoritmi dobbiamo scegliere quale delle due adottare. Passiamo quindi all'analisi del nostro dominio di interesse, cioè la question classification; quest'ultima appartiene ad un dominio intrinsecamente variabile, ambiguo e soprattutto variabile nel tempo. La QA è variabile nel tempo perché i significati di una parola sono molteplici e possono variare nel tempo, un caso esemplificativo ed evidente è la parola ``laico'' nella nostra lingua dove fino a pochissimo tempo fa stava ad indicare la non appartenenza all'ecclesia mentre ora ha in pratica preso il significato di ``ateo'' e/o ``agnostico'' (una variazione di significato non indifferente).
+Adesso che abbiamo una conoscenza generale delle differenze tra le due classi di algoritmi dobbiamo scegliere quale delle due adottare.
+
+Passiamo quindi all'analisi del dominio di interesse, ovvero la question classification; quest'ultima appartiene ad un dominio intrinsecamente variabile, ambiguo e soprattutto dipendente dal tempo. La QA è variabile nel tempo poiché i significati di una parola sono molteplici e possono variare nel tempo, un caso esemplificativo ed evidente è la parola ``laico'' nella nostra lingua dove fino a pochissimo tempo fa stava ad indicare la non appartenenza all'ecclesia mentre ora ha in pratica preso il significato di ``ateo'' e/o ``agnostico'' (una variazione di significato non indifferente).
 Poiché il nostro dominio è fortemente influenzato dalle variazioni del contesto nel quale si trova e poiché l'applicabilità degli algoritmi OffLine è stata studiata approfonditamente in molti lavori %inserire riferimento%
 mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi OnLine sul dominio della Question Classification, la scelta ricade sugli questi ultimi.
 
@@ -148,7 +150,7 @@ mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi OnLin
 Avendo scelto di utilizzare un algoritmo OnLine dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
 %per ora chiudo veloce ma qui referenze facili%
 Tra gli algoritmi OnLine la scelta ricade in particolare sull'algoritmo di Winnow.
-Questo algoritmo ha delle qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow \'e adatto in teoria per problemi con molti attributi irrilevanti'' \cite{Zhang}) e 
+Questo algoritmo ha delle qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e 
 ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto 
 ma solo poche sono rilevanti''~\cite{snow}.
 
@@ -183,7 +185,9 @@ Nel dettaglio gli obiettivi tecnici sono:
 
 \section{Pre-Processing - Feature Extraction}
 L'aggiunta delle feature è un punto delicato di un sistema di classificazione e per tale motivo va analizzando ponderatamente e compatibilmente col dominio che viene trattato dal classificatore.
-Il dominio di nostro interesse è composto da domande, le quali per loro propria natura sono ``compattate'' in media in una certa finestra di lunghezza comunque molto piccola.
+
+Il dominio trattato dal classificatore è composto da domande, le quali per loro propria natura sono ``compattate'' (brevi) in media in una certa finestra di lunghezza comunque molto piccola.
+
 L'obiettivo del preprocessing è arricchire le informazioni così da averne poi un beneficio diretto sul processo di classificazione immediatamente successivo.
 
 Le feature che si vogliono introdurre hanno lo scopo di prendere in considerazione:
@@ -208,10 +212,16 @@ Con la tecnica sopra descritta sono state aggiunte le segueni feature:
 \section{Experimental Set-Up}
 Gli strumenti utilizzati per fare gli esperimenti sono:
 \begin{itemize}
-	\item WEKA
-	\item SnowballStemmer
-	\item WordNet
-	\item JFreechart - Per la creazione dei grafici di risultato
+	\item WEKA - versione 3.5.7
+	\item SnowballStemmer - la cui interfaccia è esposta da weka
+	\item WordNet 3 - per la derivazione dei sinonimi
+	\item JFreechart 1.0.9 - per la creazione dei grafici di risultato
+\end{itemize}
+La macchina di test ha el seguenti caratteristiche principali:
+\begin{itemize}
+	\item Processore: Intel Core 2 Duo E6600; %Oppure il tuo
+	\item RAM: 2GB;
+	\item S.O.: Windows XP Professional SP2; %O Vista Businnes SP1 x64
 \end{itemize}
 
 \subsection{WEKA Winnow Classifier}
