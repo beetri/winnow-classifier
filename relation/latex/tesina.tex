@@ -225,9 +225,10 @@ La macchina di test ha el seguenti caratteristiche principali:
 \end{itemize}
 
 \subsection{Winnow Classifier - The Algorithm}
-L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad sola parola, ovvero un esperto viene interpellato quando la parola associata ad esso è presente in una domanda.
+L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
 L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
 Ogni esperto quindi associa un punteggio(o peso) alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo\footnote{raddoppiando il peso.} in caso di errore su predizione negativa o decrementandolo\footnote{dimezzando il peso.} in caso di errore su predizione positiva.
+
 
 \subsection{WEKA Winnow Classifier}
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
