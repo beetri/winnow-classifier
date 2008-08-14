@@ -212,17 +212,22 @@ Con la tecnica sopra descritta sono state aggiunte le segueni feature:
 \section{Experimental Set-Up}
 Gli strumenti utilizzati per fare gli esperimenti sono:
 \begin{itemize}
-	\item WEKA - versione 3.5.7
-	\item SnowballStemmer - la cui interfaccia è esposta da weka
-	\item WordNet 3 - per la derivazione dei sinonimi
-	\item JFreechart 1.0.9 - per la creazione dei grafici di risultato
+	\item WEKA - versione 3.5.7;
+	\item SnowballStemmer - la cui interfaccia è esposta da weka;
+	\item WordNet 3 - per la derivazione dei sinonimi;
+	\item JFreechart 1.0.9 - per la creazione dei grafici di risultato.
 \end{itemize}
 La macchina di test ha el seguenti caratteristiche principali:
 \begin{itemize}
 	\item Processore: Intel Core 2 Duo E6600; %Oppure il tuo
 	\item RAM: 2GB;
-	\item S.O.: Windows XP Professional SP2; %O Vista Businnes SP1 x64
+	\item S.O.: Windows XP Professional SP2. %O Vista Businnes SP1 x64
 \end{itemize}
+
+\subsection{Winnow Classifier - The Algorithm}
+L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad sola parola, ovvero un esperto viene interpellato quando la parola associata ad esso è presente in una domanda.
+L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
+Ogni esperto quindi associa un punteggio alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo\footnote{raddoppiando il peso.} in caso di errore su predizione negativa o decrementandolo\footnote{dimezzando il peso.} in caso di errore su predizione positiva.
 
 \subsection{WEKA Winnow Classifier}
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
