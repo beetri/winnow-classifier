@@ -197,6 +197,7 @@ Le feature che si vogliono introdurre hanno lo scopo di prendere in considerazio
 \end{enumerate}
 La tecnica che si è adottata per soddisfare questi obiettivi è stata quella di aggiungere alla domanda nuovi elementi, ad esempio quelli ottenuti dalla giustapposizione delle parole presenti nelle domanda stessa.
 
+% FORSE ANCHE QUI L'IMMAGINE DI PRIMA O FORSE PRIMA SENZA IL SOTTO E ORA COL SOTTO/ESEMPI
 Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottenendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
 È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevolmente importante nella categorizzazione delle domande.
 
@@ -217,7 +218,7 @@ Gli strumenti utilizzati per fare gli esperimenti sono:
 	\item WordNet 3 - per la derivazione dei sinonimi;
 	\item JFreechart 1.0.9 - per la creazione dei grafici di risultato.
 \end{itemize}
-La macchina di test ha el seguenti caratteristiche principali:
+La macchina di test ha le seguenti caratteristiche principali:
 \begin{itemize}
 	\item Processore: Intel Core 2 Duo E6600; %Oppure il tuo
 	\item RAM: 2GB;
@@ -231,6 +232,11 @@ Ogni esperto quindi associa un punteggio(o peso) alla parola al quale è associat
 
 
 \subsection{WEKA Winnow Classifier}
+Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze\footnote{una istanza di winnow per categoria da classificare} del classificatore basato su winnow di weka.
+
+Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta \footnote{appartenenza o non appartenenza ad una categoria.} per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
+
+Entrando nel dettaglio della fase di training del CW i classificatori vengono ``trainati'' sempre tutti, cioè ad ogni classificatore viene dato in pasto il caso di training. Al contrario l'altro schema possibile sarebbe stato quello di non intervenire nel training se il sistema generale desse la risposta corretta ma questo renderebbe i tempi di training più lunghi e difficoltosi\footnote{per questo viene scartato}.
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
 
 
