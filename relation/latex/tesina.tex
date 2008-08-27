@@ -230,11 +230,11 @@ Ogni esperto quindi associa un punteggio(o peso) alla parola al quale è associat
 
 
 \subsection{WEKA Winnow Classifier}
-Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze\footnote{una istanza di winnow per categoria da classificare} del classificatore basato su winnow di weka.
+Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze (una per categoria da classificare) del classificatore basato su winnow di weka.
 
-Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta \footnote{appartenenza o non appartenenza ad una categoria.} per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
+Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta (appartenenza o meno ad una categoria) per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
 
-Entrando nel dettaglio della fase di training del CW i classificatori vengono ``trainati'' sempre tutti, cioè ad ogni classificatore viene dato in pasto il caso di training. Al contrario l'altro schema possibile sarebbe stato quello di non intervenire nel training se il sistema generale desse la risposta corretta ma questo renderebbe i tempi di training più lunghi e difficoltosi\footnote{per questo viene scartato}.
+Entrando nel dettaglio della fase di training del CW i classificatori vengono ``trainati'' sempre tutti, cioè ad ogni classificatore viene dato in pasto il caso di training. Al contrario l'altro schema possibile sarebbe stato quello di non intervenire nel training se il sistema generale desse la risposta corretta ma questo renderebbe i tempi di training più lunghi e difficoltosi (motivo per il quale questa alternativa viene scartata).
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
 
 
