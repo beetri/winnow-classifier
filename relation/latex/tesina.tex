@@ -131,10 +131,10 @@ Le tecniche di machine learning si distinguono in due grandi categorie:
 \end{enumerate}
 Queste si distinguono principalmente per prestazioni, tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
-Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porta ad una notevole perdita di tempo ogni volta che il dominio di inferenza, ma anche le categorie utilizzate, cambiano nel tempo.
+Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porta ad una notevole perdita di tempo ogni volta che il dominio di inferenza, ma anche le categorie utilizzate, cambiano nel tempo. Solitamente il tempo di training di un classificatore off-line per di più sono molto alti problema affrontato ad esempio anche in \cite{Habib}.
 
 Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del classificatore.
-All'apparenza un classificatore OnLine offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore on-line è tipicamente peggiore di un classificatore off-line.
+All'apparenza un classificatore on-line offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore on-line è tipicamente peggiore di un classificatore off-line.
 
 
 \subsection{On-Line Algorithm}
