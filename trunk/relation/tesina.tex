@@ -137,24 +137,26 @@ Le principali caratteristiche sulle quali si distinguono le due tipolodie sono: 
 
 Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale). Il tempo di training di un classificatore off-line è solitamente maggiore, se confrontato con un classificatore online, problema affrontato ad esempio anche in~\cite{Habib}.
 
-Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come sta procedendo il lavoro di inferenza del dominio da parte del classificatore.
+Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come il classificatore sta procedendo nel lavoro di inferenza del dominio.
+
 All'apparenza un classificatore on-line offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore on-line è tipicamente peggiore di un classificatore off-line.
 
 
 \subsection{On-Line Algorithm}
 Adesso che abbiamo una conoscenza generale delle differenze tra le due classi di algoritmi dobbiamo scegliere quale delle due adottare.
 
-Passiamo quindi all'analisi del dominio di interesse, ovvero la question classification; quest'ultima appartiene ad un dominio intrinsecamente variabile, ambiguo e soprattutto dipendente dal tempo. La QA è variabile nel tempo poiché i significati di una parola sono molteplici e possono variare nel tempo, un caso esemplificativo ed evidente è la parola ``laico'' nella nostra lingua dove fino a pochissimo tempo fa stava ad indicare la non appartenenza all'ecclesia mentre ora ha in pratica preso il significato di ``ateo'' e/o ``agnostico'' (una variazione di significato non indifferente).
-Poiché il nostro dominio è fortemente influenzato dalle variazioni del contesto nel quale si trova e poiché l'applicabilità degli algoritmi OffLine è stata studiata approfonditamente in molti lavori %inserire riferimento%
-mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi OnLine sul dominio della Question Classification, la scelta ricade sugli questi ultimi.
+Passiamo quindi all'analisi del dominio di interesse, ovvero la question classification (QC); quest'ultima appartiene ad un dominio intrinsecamente variabile, ambiguo e soprattutto dipendente dal tempo.
+
+Il dominio della domande (cioè quello trattato dal question answering e dalla question classification) è variabile nel tempo perché i significati di una parola oltre a essere molteplici possono variare nel tempo, un caso esemplificativo ed evidente è la parola ``laico'' nella nostra lingua, dove fino a pochissimo tempo fa stava ad indicare la non appartenenza all'ecclesia mentre ora ha in pratica preso il significato di ``ateo'' e/o ``agnostico'' (una variazione di significato non indifferente).
+Poiché il nostro dominio è fortemente influenzato dalle variazioni del contesto nel quale si trova e poiché l'applicabilità degli algoritmi off-line è stata studiata approfonditamente in molti lavori %inserire riferimento%
+mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi on-line sulla Question Classification, la scelta ricade sugli questi ultimi.
 
 \subsection{Winnow}
-Avendo scelto di utilizzare un algoritmo on-line dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
+Scelto di utilizzare un algoritmo on-line dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
 %per ora chiudo veloce ma qui referenze facili%
 Tra gli algoritmi on-line la scelta ricade in particolare sull'algoritmo di Winnow.
-Questo algoritmo ha delle qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e 
-``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto 
-ma solo poche sono rilevanti''~\cite{snow}.
+
+L'algoritmo di Winnow ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
 
 \section{Winnow Project}
 Il progetto di un nostro classificatore avrà la seguente architettura:
@@ -180,7 +182,7 @@ Per ora trascuriamo il primo blocco ed immaginiamo che la domanda venga processa
 
 Il terzo modulo si occupa di classificare la domanda avendo come informazione solamente il vettore precedentemente creato.
 
-Ora ritorniamo al primo modulo. Poiché le domande sono per loro natura brevi dobbiamo arricchirne il contenuto aggiungendo delle Feature, questo è il lavoro svolto dal Feature Adder.
+Ritornaimo al primo modulo della pipeline. Poiché le domande sono per loro natura brevi possiamo arricchirne il contenuto aggiungendo delle Feature, questo è il lavoro svolto dal modulo denominato Feature Adder.
 
 \subsection{Obiettivi}
 Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA perché ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
