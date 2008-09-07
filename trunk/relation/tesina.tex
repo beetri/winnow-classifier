@@ -196,7 +196,7 @@ Il nostro classificatore ha la seguente architettura:
 %	Input: Vettore/Instance
 %	Ouput: Class
 
-Le domande vengono prese dal file TREC \emph{train\_5500.label} disponibile sulla rete, queste vengono parsate da un modulo che le da in pasto al secondo modulo che si occupa di trasformare le domande, ora in forma testuale, in forma vettoriale per poi farle analizzare al modulo che poi si occupa di classificare.
+Le domande vengono prese dal file TREC \emph{train\_5500.label} disponibile sulla rete, queste vengono ``parsate'' da un modulo che le da in pasto al secondo modulo che si occupa di trasformare le domande, ora in forma testuale, in forma vettoriale per poi farle analizzare al modulo che poi si occupa di classificare.
 
 \subsection{Obiettivi}
 Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA perché ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
@@ -209,7 +209,7 @@ Nel dettaglio gli obiettivi sono:
 \end{itemize}
 
 \section{Pre-Processing - Feature Extraction}
-Per un sistema di classificazione un punto delicato è la scelta delle feature e per tale motivo vanno scelte in modo ponderato e combatibile col dominio che viene trattato dal classificatore.
+Per un sistema di classificazione un punto delicato è la scelta delle feature e per tale motivo vanno scelte in modo ponderato e compatibile col dominio che viene trattato dal classificatore.
 
 Il dominio trattato dal classificatore è composto da domande, le quali per loro propria natura sono ``compattate'' (brevi/compresse) in una certa finestra di lunghezza comunque molto piccola (in media).
 
@@ -230,7 +230,7 @@ La tecnica che si è adottata per soddisfare questi obiettivi è stata quella di a
 Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottenendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
 È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevolmente importante nella categorizzazione delle domande.
 
-Con la tecnica sopra descritta sono state aggiunte le segueni feature:
+Con la tecnica sopra descritta sono state aggiunte le seguenti feature:
 \begin{enumerate}
 	\item Relazioni tra le parole sia a coppie che a triple;
 	\item Parole ``stemmate'' (lasciando anche quelle non originali), nel dettaglio tramite lo ``Snowball Stemmer'' ed un altro rudimentale sviluppato da noi;
@@ -249,9 +249,9 @@ Si è scelto di sviluppare un classificatore che rispettasse l'interfaccia di \em
 Per aggiungere feature alla domanda sono stai utilizzati:
 
 \begin{itemize}
-	\item SnowballStemmer - la cui interfaccia è esposta da weka;
+	\item SnowballStemmer - la cui interfaccia è esposta da WEKA;
 	\item WordNet 3 - per la derivazione dei sinonimi;
-	\item Più quelli da noi creati (spiegati nella sezione precedente).
+	\item Più quelli da noi creati (illustrati nella sezione precedente).
 \end{itemize}
 
 %%usato weka implementato da usare
@@ -264,14 +264,14 @@ Tale strumento consente per l'appunto di poter creare dei report riassuntivi e c
 
 \subsection{Winnow Classifier The Algorithm}
 %Approccio Bag of Word
-L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
+L'algoritmo di Winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
 L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
 Ogni esperto quindi associa un punteggio (o peso) alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo (raddoppiando il peso) in caso di errore su predizione negativa o decrementandolo (dimezzando il peso) in caso di errore su predizione positiva.
 
 
 \subsection{SMO Comparison}
 %%%%%%%%%%%%%%%%%%%%
-Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze (una per categoria da classificare) del classificatore basato su winnow di weka.
+Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze (una per categoria da classificare) del classificatore basato su Winnow di WEKA.
 
 Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta (appartenenza o meno ad una categoria) per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
 
