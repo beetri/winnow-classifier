@@ -126,7 +126,7 @@ scoprire la probabilità con cui la question sia generata da tale modello. Anche 
 si possono utilizzare altri insiemi di feature oltre alle semplici parole, come le named entity~\cite{pinto}.
 
 
-\section{Machine Learning On-Line vs Off-Line}
+\section{The starting point}
 Sebbene sia possibile create classificatori con regole euristiche costruite ad hoc~\cite{DBLP:conf/trec/Voorhees01}, tale approccio 
 richiede un'enorme quantità di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
 Al contrario utilizzando tecniche di machine learning è possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
@@ -140,7 +140,9 @@ Le tecniche di machine learning si distinguono in due grandi categorie:
 \end{enumerate}
 Le principali caratteristiche sulle quali si distinguono le due tipolodie sono: tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
-Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale). Il tempo di training di un classificatore off-line è solitamente maggiore, se confrontato con un classificatore online, problema affrontato ad esempio anche in~\cite{Habib}.
+Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale).
+% introdotto male parlare degli altri classificatori %
+Il tempo di training di un classificatore off-line è solitamente maggiore, se confrontato con un classificatore online, problema affrontato ad esempio anche in~\cite{Habib}.
 
 Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come il classificatore sta procedendo nel lavoro di inferenza del dominio.
 
@@ -158,17 +160,17 @@ mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi on-li
 
 \subsection{Winnow}
 Scelto di utilizzare un algoritmo on-line dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
-%per ora chiudo veloce ma qui referenze facili%
+%raccontare algoritmo
 Tra gli algoritmi on-line la scelta ricade in particolare sull'algoritmo di Winnow.
 
 L'algoritmo di Winnow ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
 
 \section{Winnow Project}
-Il progetto di un nostro classificatore avrà la seguente architettura:
+Il nostro classificatore ha la seguente architettura:
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[scale=0.65]{img/WinnowClassifier-Pipeline_No_Example.eps}
+	\includegraphics[scale=0.65]{img/Winnow_Classifier_Pipeline.eps}
 	\caption{Winnow Classifier pipeline}
 \end{figure}
 %DISEGNO CON TRE BLOCCHI
@@ -181,21 +183,21 @@ Il progetto di un nostro classificatore avrà la seguente architettura:
 %1)	Nome: Winnow Classifier
 %	Input: Vettore/Instance
 %	Ouput: Class
-Tre sono i blocchi funzionali presenti messi a cascata fra loro.
 
 Per ora trascuriamo il primo blocco ed immaginiamo che la domanda venga processata dal Feature Adder. La domanda viene convertita dal modulo di parsing in un vettore, più precisamente il vettore delle occorrenze.
 
 Il terzo modulo si occupa di classificare la domanda avendo come informazione solamente il vettore precedentemente creato.
 
-Ritornaimo al primo modulo della pipeline. Poiché le domande sono per loro natura brevi possiamo arricchirne il contenuto aggiungendo delle Feature, questo è il lavoro svolto dal modulo denominato Feature Adder.
+Ritorniamo al primo modulo della pipeline. Poiché le domande sono per loro natura brevi possiamo arricchirne il contenuto aggiungendo delle Feature, questo è il lavoro svolto dal modulo denominato Feature Adder.
 
 \subsection{Obiettivi}
 Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA perché ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
-Nel dettaglio gli obiettivi tecnici sono:
+Nel dettaglio gli obiettivi sono:
 \begin{itemize}
-	\item Creare un classificatore estendibile che rispetti l'interfaccia di WEKA;
-	\item Paragonare il classificatore con algoritmi OffLine già implementati in WEKA;
-	\item Studiare l'andamento del classificatore all'aumento dell'insieme di input.
+	\item Creare un classificatore che rispetti l'interfaccia di WEKA;
+	\item Paragonare il classificatore con algoritmi off-line già implementati in WEKA;
+	\item Analizzare delle prestazioni relativamente a ciascuna feature introdotta;
+	\item Studiare l'andamento del classificatore all'aumento dell'insieme di training.
 \end{itemize}
 
 \section{Pre-Processing - Feature Extraction}
@@ -214,7 +216,7 @@ La tecnica che si è adottata per soddisfare questi obiettivi è stata quella di a
 
 \begin{figure}[htb!]
 	\centering
-	\includegraphics[scale=0.65]{img/WinnowClassifier-Pipeline_3.eps}
+	\includegraphics[scale=0.85]{img/Filters_Detail.eps}
 	\caption{Winnow Classifier pipeline with example}
 \end{figure}
 % FORSE ANCHE QUI L'IMMAGINE DI PRIMA O FORSE PRIMA SENZA IL SOTTO E ORA COL SOTTO/ESEMPI
@@ -231,6 +233,33 @@ Con la tecnica sopra descritta sono state aggiunte le segueni feature:
 
 
 \section{Experimental Set-Up}
+
+\subsection{Weka Interface}
+%%usato weka implementato da usare
+
+\subsection{Filters}
+%%snowball stemmer, wordnet 3
+
+\subsection{Report}
+%%JFreeChart
+
+\subsection{Winnow Classifier The Algorithm}
+%Approccio Bag of Word
+L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
+L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
+Ogni esperto quindi associa un punteggio (o peso) alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo (raddoppiando il peso) in caso di errore su predizione negativa o decrementandolo (dimezzando il peso) in caso di errore su predizione positiva.
+
+
+\subsection{SMO Comparison}
+%%%%%%%%%%%%%%%%%%%%
+Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze (una per categoria da classificare) del classificatore basato su winnow di weka.
+
+Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta (appartenenza o meno ad una categoria) per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
+
+Entrando nel dettaglio della fase di training del CW i classificatori vengono ``trainati'' sempre tutti, cioè ad ogni classificatore viene dato in pasto il caso di training. Al contrario l'altro schema possibile sarebbe stato quello di non intervenire nel training se il sistema generale desse la risposta corretta ma questo renderebbe i tempi di training più lunghi e difficoltosi (motivo per il quale questa alternativa viene scartata).
+si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
+
+\subsection{Hardware}
 Gli strumenti utilizzati per fare gli esperimenti sono:
 \begin{itemize}
 	\item WEKA - versione 3.5.7;
@@ -240,25 +269,10 @@ Gli strumenti utilizzati per fare gli esperimenti sono:
 \end{itemize}
 La macchina di test ha le seguenti caratteristiche principali:
 \begin{itemize}
-	\item Processore: Intel Core 2 Duo E6600; %Oppure il tuo
-	\item RAM: 2GB;
-	\item S.O.: Windows XP Professional SP2. %O Vista Businnes SP1 x64
+	\item Processore: Intel Core 2 Duo T7500; %Oppure il tuo
+	\item RAM: 3GB;
+	\item S.O.: Windows Vista Business x64 SP1.
 \end{itemize}
-
-\subsection{Winnow Classifier - The Algorithm}
-L'algoritmo di winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
-L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
-Ogni esperto quindi associa un punteggio (o peso) alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo (raddoppiando il peso) in caso di errore su predizione negativa o decrementandolo (dimezzando il peso) in caso di errore su predizione positiva.
-
-
-\subsection{WEKA Winnow Classifier}
-Per poter paragonare l'efficacia del classificatore con quello dello stesso tipo di WEKA si è dovuto ``wrappare'' ben sei istanze (una per categoria da classificare) del classificatore basato su winnow di weka.
-
-Non è stato effettuato nessun tuning particolare sul classificatore presente in WEKA. Il classificatore generato dall'unione dei classificatori base (d'ora in poi CollectionWinnow o CW) è stata necessaria perché l'algoritmo di winnow è nativamente binario e quindi non in grado di classificare più di una categoria alla volta (appartenenza o meno ad una categoria) per tale motivo si è proceduto alla costruzione di una collezione di classificatori a seguendo lo scema a cascata.
-
-Entrando nel dettaglio della fase di training del CW i classificatori vengono ``trainati'' sempre tutti, cioè ad ogni classificatore viene dato in pasto il caso di training. Al contrario l'altro schema possibile sarebbe stato quello di non intervenire nel training se il sistema generale desse la risposta corretta ma questo renderebbe i tempi di training più lunghi e difficoltosi (motivo per il quale questa alternativa viene scartata).
-si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
-
 
 \section{Experimental Result}
 table table table 
