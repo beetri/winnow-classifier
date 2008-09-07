@@ -159,11 +159,23 @@ Poiché il nostro dominio è fortemente influenzato dalle variazioni del contesto 
 mentre non sono stati approfonditi i comportamenti che hanno gli algoritmi on-line sulla Question Classification, la scelta ricade sugli questi ultimi.
 
 \subsection{Winnow}
-Scelto di utilizzare un algoritmo on-line dobbiamo decidere quale algoritmo di base scegliere per poi testarlo ed adattarlo alle nostre esigenze.
-%raccontare algoritmo
+Scelto di utilizzare un algoritmo on-line bisogna scegliere l'algoritmo di base per poi testarlo ed adattarlo alle nostre esigenze.
+
 Tra gli algoritmi on-line la scelta ricade in particolare sull'algoritmo di Winnow.
 
-L'algoritmo di Winnow ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
+L'algoritmo di Winnow è composto da un insieme di ``esperti'' non meglio precisati (che volendo possono essere veri e propri classificatori complessi) ai quali è associato un peso (inizialmente pari a \emph{1}) che vengono interpellati all'arrivo dell'oggetto da classificare.
+
+Ogni ``esperto'' da come risultato \emph{1} o \emph{0} rispettivamente se l'oggetto appartiene alla classe oppure no.
+Vengono sommati i risultati ottenuti dal prodotto del peso di ogni classificatore per la predizione corrispondente (\emph{0} oppure \emph{1}). Se il risultato finale supera la soglia (nel caso semplice pari al numero di esperti) allora l'algoritmo generale risponde in modo positivo, altrimenti in modo negativo.
+
+Se l'algoritmo generale fallisce due sono i casi da distinguere:
+\begin{enumerate}
+	\item Errore su predizione positiva;
+	\item Errore su predizione negativa.
+\end{enumerate}
+Nel primo caso vengono dimezzati i pesi degli ``esperti'' che hanno predetto \emph{1}, nel secondo invece vengono raddoppiati i pesi degli ``esperti'' che hanno predetto \emph{1}.
+
+L'algoritmo ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
 
 \section{Winnow Project}
 Il nostro classificatore ha la seguente architettura:
