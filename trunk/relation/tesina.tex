@@ -186,21 +186,17 @@ Il nostro classificatore ha la seguente architettura:
 	\caption{Winnow Classifier pipeline}
 \end{figure}
 %DISEGNO CON TRE BLOCCHI
-%1)	Nome: Feature Adder (Pre-Processing)
-%	Input: Domanda
-%	Ouput: Domanda arricchita
-%2) Nome: Parsing
+%1)	Nome: Parser
+%	Input: File TREC
+%	Ouput: Domanda
+%2) Nome: Filters
 %	Input: Domanda
 %	Ouput: Vettore/Instance
-%1)	Nome: Winnow Classifier
+%1)	Nome: Winnow
 %	Input: Vettore/Instance
 %	Ouput: Class
 
-Per ora trascuriamo il primo blocco ed immaginiamo che la domanda venga processata dal Feature Adder. La domanda viene convertita dal modulo di parsing in un vettore, più precisamente il vettore delle occorrenze.
-
-Il terzo modulo si occupa di classificare la domanda avendo come informazione solamente il vettore precedentemente creato.
-
-Ritorniamo al primo modulo della pipeline. Poiché le domande sono per loro natura brevi possiamo arricchirne il contenuto aggiungendo delle Feature, questo è il lavoro svolto dal modulo denominato Feature Adder.
+Le domande vengono prese dal file TREC \emph{train\_5500.label} disponibile sulla rete, queste vengono parsate da un modulo che le da in pasto al secondo modulo che si occupa di trasformare le domande, ora in forma testuale, in forma vettoriale per poi farle analizzare al modulo che poi si occupa di classificare.
 
 \subsection{Obiettivi}
 Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA perché ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
@@ -215,7 +211,7 @@ Nel dettaglio gli obiettivi sono:
 \section{Pre-Processing - Feature Extraction}
 Per un sistema di classificazione un punto delicato è la scelta delle feature e per tale motivo vanno scelte in modo ponderato e combatibile col dominio che viene trattato dal classificatore.
 
-Il dominio trattato dal classificatore è composto da domande, le quali per loro propria natura sono ``compattate'' (brevi) in media in una certa finestra di lunghezza comunque molto piccola.
+Il dominio trattato dal classificatore è composto da domande, le quali per loro propria natura sono ``compattate'' (brevi/compresse) in una certa finestra di lunghezza comunque molto piccola (in media).
 
 L'obiettivo del preprocessing è quello di arricchire le informazioni così da averne poi un beneficio diretto sul processo di classificazione immediatamente successivo.
 
@@ -229,9 +225,8 @@ La tecnica che si è adottata per soddisfare questi obiettivi è stata quella di a
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[scale=0.85]{img/Filters_Detail.eps}
-	\caption{Winnow Classifier pipeline with example}
+	\caption{Filters example}
 \end{figure}
-% FORSE ANCHE QUI L'IMMAGINE DI PRIMA O FORSE PRIMA SENZA IL SOTTO E ORA COL SOTTO/ESEMPI
 Ad esempio se una domanda è nella forma ``What is the fire'', vengono aggiunte le parole ``What\_is'', ``is\_the'', ``the\_fire'', ottenendo quindi un risultato del genere: ``What is the fire What\_is is\_the the\_fire''.
 È semplice vedere come soprattutto la prima composizione (i.e. ``What\_is'') sia di notevolmente importante nella categorizzazione delle domande.
 
@@ -243,17 +238,29 @@ Con la tecnica sopra descritta sono state aggiunte le segueni feature:
 	\item Utilizzo di WordNet per la derivazione del tipo sintattico della parola ed in più la giustapposizione dei tipi sintattici per coppie e per triple. % Referenza su wordnet %
 \end{enumerate}
 
+L'ultimo filtro trasforma la domanda nel vettore delle occorrenze seguendo il modello \emph{Bag of words}.
 
 \section{Experimental Set-Up}
 
 \subsection{Weka Interface}
-%%usato weka implementato da usare
+Si è scelto di sviluppare un classificatore che rispettasse l'interfaccia di \emph{WEKA} (v 3.5.7), per poter poi così comparare il lavoro da noi svolto con altri classificatori già implementati all'interno dello strumento.
 
 \subsection{Filters}
+Per aggiungere feature alla domanda sono stai utilizzati:
+
+\begin{itemize}
+	\item SnowballStemmer - la cui interfaccia è esposta da weka;
+	\item WordNet 3 - per la derivazione dei sinonimi;
+	\item Più quelli da noi creati (spiegati nella sezione precedente).
+\end{itemize}
+
+%%usato weka implementato da usare
 %%snowball stemmer, wordnet 3
 
 \subsection{Report}
-%%JFreeChart
+Per avere una visione più intuitiva delle prestazioni del classificatore sono stati creati dei report grafici creati con \emph{JFreechart 1.0.9}.
+
+Tale strumento consente per l'appunto di poter creare dei report riassuntivi e comparativi partendo da dati numerici.
 
 \subsection{Winnow Classifier The Algorithm}
 %Approccio Bag of Word
@@ -272,13 +279,6 @@ Entrando nel dettaglio della fase di training del CW i classificatori vengono ``
 si dice che è binario e che ne abbiamo fatto uno raggruppandone N uno per ogni categoria
 
 \subsection{Hardware}
-Gli strumenti utilizzati per fare gli esperimenti sono:
-\begin{itemize}
-	\item WEKA - versione 3.5.7;
-	\item SnowballStemmer - la cui interfaccia è esposta da weka;
-	\item WordNet 3 - per la derivazione dei sinonimi;
-	\item JFreechart 1.0.9 - per la creazione dei grafici di risultato.
-\end{itemize}
 La macchina di test ha le seguenti caratteristiche principali:
 \begin{itemize}
 	\item Processore: Intel Core 2 Duo T7500; %Oppure il tuo
