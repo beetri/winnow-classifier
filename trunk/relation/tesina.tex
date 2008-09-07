@@ -127,7 +127,7 @@ si possono utilizzare altri insiemi di feature oltre alle semplici parole, come 
 
 
 \section{The starting point}
-Sebbene sia possibile create classificatori con regole euristiche costruite ad hoc~\cite{DBLP:conf/trec/Voorhees01}, tale approccio 
+Sebbene sia possibile creare classificatori con regole euristiche costruite ad hoc~\cite{DBLP:conf/trec/Voorhees01}, tale approccio 
 richiede un'enorme quantità di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
 Al contrario utilizzando tecniche di machine learning è possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
 approccio è più flessibile e si adatta facilmente a nuove categorie~\cite{Zhang}. Ed è questo 
@@ -141,10 +141,10 @@ Le tecniche di machine learning si distinguono in due grandi categorie:
 Le principali caratteristiche sulle quali si distinguono le due tipolodie sono: tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
 Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale).
-% introdotto male parlare degli altri classificatori %
-Il tempo di training di un classificatore off-line è solitamente maggiore, se confrontato con un classificatore online, problema affrontato ad esempio anche in~\cite{Habib}.
 
-Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente all'addestratore di valutare in continuazione come il classificatore sta procedendo nel lavoro di inferenza del dominio.
+I tempi di training dei classificatori basati su tecniche di machine learning possono essere molto diversi da classificatore a classificatore; tipicamente il tempo di training di un classificatore off-line è maggiore, se confrontato con un classificatore online~\cite{Habib}.
+
+Al contrario un algoritmo on-line impara sul campo e durante l'addestramento può comunque essere interrogato, questo consente ``all'addestratore'' di valutare in continuazione come procede il lavoro di inferenza del dominio da parte del classificatore .
 
 All'apparenza un classificatore on-line offre più vantaggi ma come spesso accade ai ``pro'' vanno sommati dei ``contro'', che in questo caso ricadono sulle prestazioni del classificatore; un classificatore on-line è tipicamente peggiore di un classificatore off-line.
 
