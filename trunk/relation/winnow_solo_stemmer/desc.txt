@@ -1,0 +1,34 @@
+RISULTATO TEST VALIDATION: number of instances >>> 5452 <<<
+
+Correctly Classified Instances         325               65      %
+Incorrectly Classified Instances       141               28.2    %
+Kappa statistic                          0.6123
+Mean absolute error                      0.128 
+Root mean squared error                  0.3578
+Relative absolute error                 51.9759 %
+Root relative squared error            102.0796 %
+UnClassified Instances                  34                6.8    %
+Total Number of Instances              500     
+
+TEST VALIDATION: number of instances >>> 5452 <<<
+   a   b   c   d   e   f   <-- classified as
+   6   2   1   0   0   0 |   a = ABBR
+   0 131   5   0   0   0 |   b = DESC
+   0  22  49   3   6   0 |   c = ENTY
+   2   5   5  48   0   0 |   d = HUM
+   0  13  18   1  39   3 |   e = LOC
+   0  23  17   6   9  52 |   f = NUM
+
+ -1      11.6  
+  0      61.6  
+  1     100    
+
+=== Detailed Accuracy By Class ===
+
+TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+  0.667     0.004      0.75      0.667     0.706      0.831    ABBR
+  0.963     0.197      0.668     0.963     0.789      0.883    DESC
+  0.613     0.119      0.516     0.613     0.56       0.635    ENTY
+  0.8       0.025      0.828     0.8       0.814      0.922    HUM
+  0.527     0.038      0.722     0.527     0.609      0.842    LOC
+  0.486     0.008      0.945     0.486     0.642      0.872    NUM

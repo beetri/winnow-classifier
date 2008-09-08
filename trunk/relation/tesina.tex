@@ -13,20 +13,18 @@
 
 \begin{document}
 \title{Question Classification and On-Line Alghoritms: Winnow Classifier}
-\author{Valerio \& Fabio}
+\author{Valerio Barbagallo \& Fabio Grucci}
 % Remove command to get current date 
 \date{\today}
 \maketitle
 
 \begin{abstract}
-L'articolo tratta del problema della Question Answering (QA) in particolare della Question Classification (QC).
+L'articolo tratta del problema del Question Answering (QA) in particolare della Question Classification (QC).
 
-Nel dettaglio vengono trattati i problemi che insorgono quando si vogliono realizzare algoritmi per la QC: analisi del dominio di interesse, scelta di una tipologia di algoritmo (on-line/off-line), scelta dell'algoritmo, scelta delle feature da applicare, implementazione e confronto con altri classificatori noti.%%non mi piace molto la frase riscrivere
+Nel dettaglio vengono trattati i problemi che sorgono quando si vogliono realizzare algoritmi per la QC: analisi del dominio di interesse, scelta di una tipologia di algoritmo (on-line/off-line), scelta dell'algoritmo, scelta delle feature da applicare, implementazione e confronto con altri classificatori noti.%%non mi piace molto la frase riscrivere
 
-In modo particolare l'interesse è quello di testare l'efficacia di un algoritmo on-line (Winnow) nel dominio della Question Classification,
-%questo lo scrivo alla fine! farò un brevissimo riassunto, niente di particolare.
-%Però tanto per anticipare quello di cui parliamo è la QC e l'implementazione fatta da noi è 
-%winnow, un algoritmo on-line.
+In modo particolare l'interesse è quello di testare l'efficacia di un algoritmo on-line (Winnow) nel dominio della Question Classification, studiandone dettagliatamente le prestazioni sia in relazione alla variazione della grandezza del training set, sia al tipo di feature utilizzate.
+
 %etc~\ldots\ 
 \end{abstract}
 
@@ -127,11 +125,8 @@ si possono utilizzare altri insiemi di feature oltre alle semplici parole, come 
 
 
 \section{The starting point}
-Sebbene sia possibile creare classificatori con regole euristiche costruite ad hoc~\cite{DBLP:conf/trec/Voorhees01}, tale approccio 
-richiede un'enorme quantità di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
-Al contrario utilizzando tecniche di machine learning è possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale 
-approccio è più flessibile e si adatta facilmente a nuove categorie~\cite{Zhang}. Ed è questo 
-l'approccio che intendiamo usare per il nostro classificatore.
+Sebbene sia possibile creare classificatori con regole euristiche costruite ad hoc~\cite{DBLP:conf/trec/Voorhees01}, tale approccio richiede un'enorme quantità di tempo e di noioso lavoro. Per di più un approccio troppo specifico sarebbe poco flessibile ai cambiamenti che si trovano nel dominio di interesse.
+Al contrario utilizzando tecniche di machine learning è possibile costruire classificatori che abbiano alte performance e che riescano a gestire migliaia di feature. Oltretutto tale approccio è più flessibile e si adatta facilmente a nuove categorie~\cite{Zhang}. Ed è questo l'approccio che intendiamo usare per il nostro classificatore.
 
 Le tecniche di machine learning si distinguono in due grandi categorie:
 \begin{enumerate}
@@ -140,7 +135,7 @@ Le tecniche di machine learning si distinguono in due grandi categorie:
 \end{enumerate}
 Le principali caratteristiche sulle quali si distinguono le due tipolodie sono: tempo di addestramento, flessibilità e conseguentemente per algoritmo.
 
-Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere iniziato da zero. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale).
+Un classificatore off-line deve essere addestrato su un insieme di input (training set). Una volta finita la fase di addestramento, è in grado di classificare, ma non più di imparare. Nel caso si voglia far imparare al classificatore nuovi esempi, l'addestramento deve essere ricominciato. Questo porterebbe ad una notevole perdita di tempo se il dominio di inferenza, ma anche le categorie utilizzate, cambiassero nel tempo (rendendo il training set precedentemente utilizzato per ``costruire'' il classificatore non più coerente con lo stato attuale).
 
 I tempi di training dei classificatori basati su tecniche di machine learning possono essere molto diversi da classificatore a classificatore; tipicamente il tempo di training di un classificatore off-line è maggiore, se confrontato con un classificatore online~\cite{Habib}.
 
@@ -281,15 +276,163 @@ La macchina di test ha le seguenti caratteristiche principali:
 \end{itemize}
 
 \section{Experimental Result}
-table table table 
+Analizziamo ora i risultati ottenuti. Ci concentriamo dapprima sul nostro classificatore, dopodichè sul confronto con SMO.
+
+\subsection{Winnow Result}
+In questo paragrafo analizziamo, quindi, alcuni risultati ottenuti dal nostro classificatore a seconda delle feature utilizzate.
+
+\subsubsection{All Feature (best result)}
+Il miglior risultato ottenuto dal nostro classificatore, utilizzando tutte le feature descritte nei paragrafi precedenti (dalle parole stemmate all'ordine delle parole nella domanda), ha portato ad un'accuracy dell'80.6\%. Riportiamo di seguito uno schema riassuntivo del risultato ottenuto nella stessa forma che prevede l'"Evaluator" di Weka:
+{\footnotesize
+\begin{verbatim}
+Correctly Classified Instances    403         80.6    %
+Incorrectly Classified Instances   71         14.2    %
+Kappa statistic                     0.8098
+Mean absolute error                 0.065 
+Root mean squared error             0.255 
+Relative absolute error            25.9565 %
+Root relative squared error        72.1325 %
+UnClassified Instances             26         5.2    %
+Total Number of Instances         500   
+\end{verbatim}
+}
+
+Volendo però analizzare più nel dettaglio tale risultato, ci accorgiamo come il classificatore non è performante alla stessa maniera in tutte le categorie. Non capita mai che il sistema classifichi erroneamente una domanda appartentente alla macro categoria abbreviation. Mentre esattamente opposto è il comportamento relativo alla categoria entity, che è spesso causa di errore.
+{\footnotesize
+\begin{verbatim}
+   a   b   c   d   e   f   <-- classified as
+   7   2   0   0   0   0 |   a = ABBR
+   0 129   2   0   0   6 |   b = DESC
+   0  10  58   0   4   7 |   c = ENTY
+   0   0   3  56   2   0 |   d = HUM
+   0   2  13   0  59   3 |   e = LOC
+   0   4   6   5   2  94 |   f = NUM
+\end{verbatim}
+}
+
+Ma un analisi del genere è ancora sommaria: la precision non è l'unico parametro con cui valutare le prestazioni di un classificatore. Nello studio dei classificatori i parametri più utilizzati sono infatti la precision e la recall. Il primo si riferisce al rapporto tra il numero di domande classificate correttamente per una certa categoria diviso il numero di domande classificate in totale sempre appartenenti alla stessa categoria. Il secondo, invece, corrisponde al rapporto tra il numero di domande classificate correttamente per una categoria diviso tutte le domande appartenenti a tale categoria.
+
+Difatti, analizzando nuovamente i dati, possiamo notare come per la categoria abbreviation la precision è 1, ma non la recall. Mentre per la classe entity sia la precision che la recall sono tra i valori più bassi fatti registrare dal nostro classificatore. La tabella \ref{best} riporta i dati tecnici di cui stiamo parlando, più altri che sicuramente saranno noti agli esperti del settore e di Weka.
+
+\begin{table}[htbp]
+	\centering
+	{\footnotesize
+		\begin{tabular}{|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}| }		
+		 \hline		 
+	TP Rate & FP Rate &  Precision  & Recall &F-Measure &  ROC Area &  Class \\ \hline
+  0.778 &   0     &     1      &   0.778  &   0.875   &   0.889  &  ABBR \\ \hline 
+  0.942   &  0.053   &   0.878  &   0.942  &   0.908   &   0.934  &  DESC \\ \hline
+  0.734   &  0.061  &    0.707  &   0.734  &   0.72    &   0.749  &  ENTY \\ \hline 
+  0.918 &    0.012  &    0.918  &   0.918  &   0.918   &   0.925  &  HUM \\ \hline 
+  0.766  &   0.02   &    0.881  &   0.766   &  0.819   &   0.893  &  LOC \\ \hline
+  0.847   &  0.044  &    0.855  &   0.847  &   0.851   &   0.947  &  NUM \\ \hline  
+		\end{tabular}
+		}
+		\caption{Detailed Accuracy By Class}
+		\label{best} 
+\end{table}
+
+Infine, come ci eravamo proposti, analizziamo anche l'andamento delle prestazioni del classificatore al variare dell'insieme di input, questo per capire come si comporta l'algoritmo, che, ripetiamo, essendo on-line, è in grado di imparare anche durante l'utilizzo dello stesso. Si può osservare tale andamento nella figura \ref{andamento_best}. 
+
+\begin{figure}[htp!]
+ \begin{center}
+	\includegraphics[scale=0.22]{winnow_all_feature/Winnow_All_Feature.png}
+	\end{center}
+	\caption{Andamento di winnow con tutte le feature}
+	\label{andamento_best}
+\end{figure}
+
+Si noti come il comportamento di winnow sia piuttosto oscillatorio e come, nonostante una breve fase iniziale di assestamento, il comportamento di winnow, seppur restando oscillatorio, si stabilizza intorno a certi valori, senza mostrare un incremento notevole all'aumentare dell'input. Tale fenomeno ovviamente potrebbe dipendere sia dal training set, che sebbene comprende 5500 domande, potrebbe ritenersi ancora piuttosto ridotto; sia dalla scelta delle feature utilizzate; ma anche dai parametri/pesi propri dell'algoritmo che, con un'accurata fase di tuning, potrebbero portare a dei miglioramenti sensibili delle performance.
+
+\subsubsection{Zero feature}
+Mostriamo ora, invece, i risultati che winnow otteneva prima di applicare qualsiasi feature da noi proposta. Ossia in questo esempio viene utilizzato semplicemente l'approccio bag of word, dove ogni esperto è una delle parole che occorrono nella domanda, senza andare a fare nessuna modifica di quest'ultima. Si può notare come l'accuracy sia intorno al 50\% e quindi come l'utilizzo delle feature da noi studiate, abbia portato ad un miglioramento del 30\%.
+{\footnotesize
+\begin{verbatim}
+Correctly Classified Instances    253        50.6    %
+Incorrectly Classified Instances  101        20.2    %
+Kappa statistic                     0.6453
+Mean absolute error                 0.0927
+Root mean squared error             0.3045
+Relative absolute error            48.7635 %
+Root relative squared error        98.0838 %
+UnClassified Instances            146        29.2    %
+Total Number of Instances         500     
+\end{verbatim}
+}
+
+Dalla tabella \ref{zero} si può notare come la classe che in queste condizioni ha il risultato peggiore, sia in termini di precision che di recall, è la classe description, che è quindi quella che trae maggior beneficio dalle feature da noi utilizzate.
+\begin{table}[htbp]
+	\centering
+	{\footnotesize
+		\begin{tabular}{|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}|@{}c@{}| }		
+		 \hline		 
+	TP Rate & FP Rate &  Precision  & Recall &F-Measure &  ROC Area &  Class \\ \hline
+  0.875   &  0.009  &    0.7     &  0.875 &    0.778   &   0.886  &  ABBR \\ \hline  
+  0.585   &  0.083  &    0.554   &  0.585 &    0.569   &   0.581  &  DESC \\ \hline  
+  0.701   &  0.167  &    0.495   &  0.701 &    0.58    &   0.71   &  ENTY \\ \hline  
+  0.8     &  0.027  &    0.846   &  0.8   &    0.822   &   0.871  &  HUM \\ \hline  
+  0.75    &  0.049  &    0.785   &  0.75  &    0.767   &   0.833  &  LOC \\ \hline  
+  0.709   &  0.012  &    0.961   &  0.709 &    0.816   &   0.91   &  NUM \\ \hline  
+		\end{tabular}
+		}
+		\caption{Zero feature result}
+		\label{zero} 
+\end{table}
+
+\subsubsection{Stemmer only}
+Un altro risultato degno di nota, è quello prodotto dall'utilizzo delle sole parole stemmate. Quest'unica feature da sola apporta un miglioramento del 15\% rispetto al caso di nessuna feature utilizzata. Riteniamo quindi tale caratteristica di estrema importanza nel dominio della question classification.
+{\footnotesize
+\begin{verbatim}
+Correctly Classified Instances    325         65      %
+Incorrectly Classified Instances  141         28.2    %
+Kappa statistic                     0.6123
+Mean absolute error                 0.128 
+Root mean squared error             0.3578
+Relative absolute error            51.9759 %
+Root relative squared error       102.0796 %
+UnClassified Instances             34          6.8    %
+Total Number of Instances          500 
+\end{verbatim}
+}
+
+\subsection{Winnow vs SMO}
+In questo paragrafo compariamo invece il risultato prodotto da winnow, un algoritmo on-line, con SMO, un'implementazione particolare delle Support Vector Machine, ossia un algoritmo off-line.
+
+\subsubsection{All Feature}
+In questo test sono state utilizzate tutte le feature da noi analizzate: notiamo nella figura \ref{comparison1} come SMO abbia prestazioni superiori rispetto a Winnow, ad esclusione di una fase transitoria iniziale. Ma già dopo un training set composto da 1000 domande, SMO è decisamente supeirore a Winnow. Oltretutto SMO mostra una migliore tendenza a crescere in prestazione con l'aumentare dell'insieme di training, fino ad arrivare a circa il 90\% di accuracy, mentre Winnow resta piuttosto costante. Però è doveroso dire che SMO, a differenza di Winnow, oltre a essere molto più lento nella fase di addestramento, non è più in grado di imparare dopo che tale fase sia terminata.
+
+\begin{figure}[htp!]
+ \begin{center}
+	\includegraphics[scale=0.22]{comparison/ClassifierComparison2.png}
+	\end{center}
+	\caption{Winnow vs SMO with all feature}
+	\label{comparison1}
+\end{figure}
+
+\subsubsection{Zero Feature}
+In questo secondo test, rappresentato dalla figura \ref{comparison2}, non viene utilizzata alcuna feature, ma viene semplicemente data in pasto al classificatore la domanda così com'è. Ciò che risulta evidente è come il compostamento di SMO sia molto simile a quello del caso precedente (con tutte le feature), mentre Winnow mostra delle serie limitazioni qualora gli esperti utilizzati non sia poi così esperti.
+\begin{figure}[htp!]
+ \begin{center}
+	\includegraphics[scale=0.22]{comparison/ClassifierComparison3.png}
+	\end{center}
+	\caption{Winnow vs SMO with zero feature}
+	\label{comparison2}
+\end{figure}
 
 \section{Conclusion}
 %BOZZA CONCETTI%
-Come visibile dai grafici l'algoritmo di Winnow soffre di una oscillazione, caratteristica propria dell'algoritmo. L'ampiezza dell'oscillazione dipende dai parametri interni dell'algoritmo.
+In conclusione si può dire che l'algoritmo di Winnow non tradisce le aspettative, pur avendo prestazioni nettamente inferiori ad un classificatore off-line (ossia SMO).
 
-Si può dire che l'algoritmo di Winnow non tradisce le aspettative, pur avendo prestazioni nettamente inferiori ad un classificatore off-line (e.g. SMO).
+Un'interessante caratteristica che si può notare di Winnow è come il suo comportamento degradi molto poco con l'aumentare del numero di esperti/feature utilizzate, mentre anche solo pochi esperti rilevanti apportano un grande contributo alle performance del classificatore. Questo va a conferma di quanto già è stato notato da \cite{Zhang} e da \cite{snow}. 
+
+A tal proposito, le feature che hanno contribuito maggiormente all'incremento delle prestazioni sono lo stemmer e la coppia formata dalle prime due parole di ogni domanda.
+
+Abbiamo, poi, osservato come la classe entity sia quella di più difficile classificazione, e che quindi richiederebbe l'utilizzo di feature adatte e specifiche allo scopo, come le tecniche di named entity recognition, con l'uso di opportuni tag da inserire/sostituire all'interno della domanda.
+
+Un'altra interessante osservazione, come visibile dai grafici, è il comportamento oscillatorio di Winnow, caratteristica propria dell'algoritmo. L'ampiezza dell'oscillazione dipende dai parametri interni dell'algoritmo.
 
 Considerando che le feature introdotte sono semplici e che il tuning non è stato fatto in modo minuzioso, i margini di miglioramento di certo ci sono.
+
 
 \bibliography{biblio}
 \bibliographystyle{plain}
