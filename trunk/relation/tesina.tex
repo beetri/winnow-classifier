@@ -168,7 +168,7 @@ Se l'algoritmo generale fallisce due sono i casi da distinguere:
 	\item Errore su predizione positiva;
 	\item Errore su predizione negativa.
 \end{enumerate}
-Il peso degli esperti che hanno predetto \emph{1}, viene dimezzato nel primo caso oppure se si ricade nel secondo caso raddoppiato.
+Il peso degli esperti che hanno predetto \emph{1} viene dimezzato nel primo caso e raddoppiato nel seocndo.
 
 L'algoritmo ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
 
@@ -194,7 +194,7 @@ Il nostro classificatore ha la seguente architettura:
 Le domande vengono prese dal file TREC \emph{train\_5500.label} disponibile sulla rete, queste vengono ``parsate'' da un modulo che le da in pasto al secondo modulo che si occupa di trasformare le domande, ora in forma testuale, in forma vettoriale per poi farle analizzare al modulo che poi si occupa di classificare.
 
 \subsection{Obiettivi}
-Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA, essa ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
+Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA, che ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
 Nel dettaglio gli obiettivi sono:
 \begin{itemize}
 	\item Creare un classificatore che rispetti l'interfaccia di WEKA;
