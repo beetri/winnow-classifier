@@ -160,7 +160,7 @@ Tra gli algoritmi on-line la scelta ricade in particolare sull'algoritmo di Winn
 
 L'algoritmo di Winnow è composto da un insieme di ``esperti'' non meglio precisati (che volendo possono essere veri e propri classificatori complessi) ai quali è associato un peso (inizialmente pari a \emph{1}) che vengono interpellati all'arrivo dell'oggetto da classificare.
 
-Ogni ``esperto'' da come risultato \emph{1} o \emph{0} rispettivamente se l'oggetto appartiene alla classe oppure no.
+Ogni ``esperto'' dà come risultato \emph{1} o \emph{0} rispettivamente se l'oggetto appartiene alla classe oppure no.
 Vengono sommati i risultati ottenuti dal prodotto del peso di ogni classificatore per la predizione corrispondente (\emph{0} oppure \emph{1}). Se il risultato finale supera la soglia (nel caso semplice pari al numero di esperti) allora l'algoritmo generale risponde in modo positivo, altrimenti in modo negativo.
 
 Se l'algoritmo generale fallisce due sono i casi da distinguere:
@@ -168,7 +168,7 @@ Se l'algoritmo generale fallisce due sono i casi da distinguere:
 	\item Errore su predizione positiva;
 	\item Errore su predizione negativa.
 \end{enumerate}
-Nel primo caso vengono dimezzati i pesi degli ``esperti'' che hanno predetto \emph{1}, nel secondo invece vengono raddoppiati i pesi degli ``esperti'' che hanno predetto \emph{1}.
+Il peso degli esperti che hanno predetto \emph{1}, viene dimezzato nel primo caso oppure se si ricade nel secondo caso raddoppiato.
 
 L'algoritmo ha molte qualità tra le quali spicca la capacita di non essere influenzato dalla presenza di molti attributi irrilevanti (``winnow è adatto in teoria per problemi con molti attributi irrilevanti''~\cite{Zhang}) e ``winnow impara linearmente con il numero di feature rilevanti, e solo logaritmicamente con il numero totale di feature. questa proprietà sembra cruciale in problemi nei quali il numero di feature potenziali è vasto ma solo poche sono rilevanti''~\cite{snow}.
 
@@ -194,7 +194,7 @@ Il nostro classificatore ha la seguente architettura:
 Le domande vengono prese dal file TREC \emph{train\_5500.label} disponibile sulla rete, queste vengono ``parsate'' da un modulo che le da in pasto al secondo modulo che si occupa di trasformare le domande, ora in forma testuale, in forma vettoriale per poi farle analizzare al modulo che poi si occupa di classificare.
 
 \subsection{Obiettivi}
-Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA perché ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
+Entriamo nella fase realizzativa, la piattaforma scelta è quella di WEKA, essa ci offre la possibilità di utilizzare e poter paragonare agilmente l'efficacia del classificatore con gli altri già implementati nello strumento.
 Nel dettaglio gli obiettivi sono:
 \begin{itemize}
 	\item Creare un classificatore che rispetti l'interfaccia di WEKA;
@@ -204,7 +204,7 @@ Nel dettaglio gli obiettivi sono:
 \end{itemize}
 
 \section{Pre-Processing - Feature Extraction}
-Per un sistema di classificazione un punto delicato è la scelta delle feature e per tale motivo vanno scelte in modo ponderato e compatibile col dominio che viene trattato dal classificatore.
+Per un sistema di classificazione la scelta delle feature da applicare è un punto delicato, per tale motivo bisogna selezionarle in modo ponderato e compatibile col dominio che viene trattato dal classificatore.
 
 Il dominio trattato dal classificatore è composto da domande, le quali per loro propria natura sono ``compattate'' (brevi/compresse) in una certa finestra di lunghezza comunque molto piccola (in media).
 
@@ -257,9 +257,9 @@ Tale strumento consente per l'appunto di poter creare dei report riassuntivi e c
 
 \subsection{Winnow Classifier The Algorithm}
 %Approccio Bag of Word
-L'algoritmo di Winnow realizzato ha la seguente architettura: ad ogni ``classe'' da classificare è associata una collezione di così detti ``esperti'', ogni esperto è relativo ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
+L'algoritmo di Winnow realizzato ha la seguente architettura: ad ogni ``classe'' è associata una collezione di ``esperti'', ognuno dei quali associato ad una parola, ovvero un esperto viene interpellato ogni qual volta la parola associata ad esso è presente nella domanda.
 L'algoritmo quindi ha come input una domanda, per ogni parola presente nella domanda interroga il relativo esperto, se la somma dei punteggi di tutti gli esperti supera una certa soglia allora la predizione per quella determinata classe è positiva altrimenti no.
-Ogni esperto quindi associa un punteggio (o peso) alla parola al quale è associato, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo (raddoppiando il peso) in caso di errore su predizione negativa o decrementandolo (dimezzando il peso) in caso di errore su predizione positiva.
+In pratica ogni esperto quindi associa un punteggio (o peso) alla parola al quale è relativo, tale punteggio viene gestito secondo l'algoritmo classico, cioè incrementandolo (raddoppiando il peso) in caso di errore su predizione negativa o decrementandolo (dimezzando il peso) in caso di errore su predizione positiva.
 
 
 \subsection{SMO Comparison}
