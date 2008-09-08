@@ -1,0 +1,62 @@
+\begin{thebibliography}{10}
+
+\bibitem{snow}
+Jeff L.~Rosen Andrew J.~Carlson, Chad M.~Cumby and Dan Roth.
+\newblock Snow user's guide.
+\newblock \url{http://l2r.cs.uiuc.edu/~danr/Papers/userguide.ps.gz}, 1999.
+
+\bibitem{brown}
+Jonathan Brown.
+\newblock Entity-tagged language models for question classification in a qa
+  system.
+\newblock
+  \url{http://nyc.lti.cs.cmu.edu/IRLab/11-743s04/jonbrown/Brown-IRLab.pdf},
+  2004.
+
+\bibitem{Zhalaing}
+Zhalaing Cheung, Khanh~Linh Phan, Ashesh Mahidadia, and Achim Hoffmann.
+\newblock Feature extraction for learning to classify questions.
+\newblock \url{http://ciir.cs.umass.edu/~weili/papers/qc.pdf}.
+
+\bibitem{gerber}
+Laurie Gerber, Ulf Hermjakob, Eduard Hovy, and Deepak Ravichandran.
+\newblock The isi question answer typology, qtargets used in webclopedia.
+\newblock
+  \url{http://www.isi.edu/natural-language/projects/webclopedia/Taxonomy/taxon%
+omy_toplevel.html}, 2002.
+
+\bibitem{Habib}
+Mona~Soliman Habib.
+\newblock Addressing scalability issues of named entity recognition using
+  multi-class support vector machines, 2006.
+
+\bibitem{WeiLi}
+Wei Li.
+\newblock Question classification using language modeling.
+\newblock \url{http://ciir.cs.umass.edu/~weili/papers/qc.pdf}, 2003.
+
+\bibitem{XinLi}
+Xin Li and Dan Roth.
+\newblock Learning question classifiers.
+\newblock
+  \url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.3.7195&rep=rep%
+1&type=pdf}, 2002.
+
+\bibitem{pinto}
+D.~Pinto, W.~Croft, M.~Branstein, R.~Coleman, M.~King, W.Li, and X.~Wei.
+\newblock Quasm: A system for question answering using semi-structured data,
+  2002.
+
+\bibitem{DBLP:conf/trec/Voorhees01}
+Ellen~M. Voorhees.
+\newblock Overview of trec 2001.
+\newblock In {\em TREC}, 2001.
+
+\bibitem{Zhang}
+Tong Zhang.
+\newblock Large margin winnow methods for text categorization.
+\newblock
+  \url{http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=398E23634B77B6%
+D88BECA4A8F1BE7FEA?doi=10.1.1.36.6312&rep=rep1&type=pdf}, 2000.
+
+\end{thebibliography}
