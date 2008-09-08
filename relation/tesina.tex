@@ -19,11 +19,11 @@
 \maketitle
 
 \begin{abstract}
-L'articolo tratta del problema del Question Answering (QA) in particolare della Question Classification (QC).
+L'articolo tratta il problema del Question Answering (QA), in particolare della Question Classification (QC).
 
-Nel dettaglio vengono trattati i problemi che sorgono quando si vogliono realizzare algoritmi per la QC: analisi del dominio di interesse, scelta di una tipologia di algoritmo (on-line/off-line), scelta dell'algoritmo, scelta delle feature da applicare, implementazione e confronto con altri classificatori noti.%%non mi piace molto la frase riscrivere
+Nel dettaglio vengono trattati i problemi che sorgono quando si vuole realizzare un algoritmo per la QC: analisi del dominio di interesse, scelta di una tipologia di algoritmo (on-line/off-line), scelta dell'algoritmo, scelta delle feature da applicare, implementazione e confronto con altri classificatori noti.%%non mi piace molto la frase riscrivere
 
-In modo particolare l'interesse è quello di testare l'efficacia di un algoritmo on-line (Winnow) nel dominio della Question Classification, studiandone dettagliatamente le prestazioni sia in relazione alla variazione della grandezza del training set, sia al tipo di feature utilizzate.
+In modo particolare l'interesse dell'articolo è quello di testare l'efficacia di un algoritmo on-line (Winnow) nel dominio della Question Classification, valutandone le prestazioni sia in relazione alla variazione della grandezza del training set, sia al tipo di feature utilizzate.
 
 %etc~\ldots\ 
 \end{abstract}
@@ -423,11 +423,11 @@ In questo secondo test, rappresentato dalla figura \ref{comparison2}, non viene 
 %BOZZA CONCETTI%
 In conclusione si può dire che l'algoritmo di Winnow non tradisce le aspettative, pur avendo prestazioni nettamente inferiori ad un classificatore off-line (ossia SMO).
 
-Un'interessante caratteristica che si può notare di Winnow è come il suo comportamento degradi molto poco con l'aumentare del numero di esperti/feature utilizzate, mentre anche solo pochi esperti rilevanti apportano un grande contributo alle performance del classificatore. Questo va a conferma di quanto già è stato notato da \cite{Zhang} e da \cite{snow}. 
+Un'interessante caratteristica che si può notare di Winnow è come il suo comportamento degradi molto poco con l'aumentare del numero di esperti/feature utilizzate, mentre anche solo pochi esperti rilevanti apportano un grande contributo alle performance del classificatore. Questo va a conferma di quanto già notato da \cite{Zhang} e da \cite{snow}. 
 
 A tal proposito, le feature che hanno contribuito maggiormente all'incremento delle prestazioni sono lo stemmer e la coppia formata dalle prime due parole di ogni domanda.
 
-Abbiamo, poi, osservato come la classe entity sia quella di più difficile classificazione, e che quindi richiederebbe l'utilizzo di feature adatte e specifiche allo scopo, come le tecniche di named entity recognition, con l'uso di opportuni tag da inserire/sostituire all'interno della domanda.
+Abbiamo poi osservato come la classe entity sia quella di più difficile classificazione, in virtù di questo risultato si dovrebbero approfondire tecniche specifiche in grado di migliorare le prestazioni sulla classe in analisi, come le tecniche di named entity recognition, con l'uso di opportuni tag da inserire/sostituire all'interno della domanda.
 
 Un'altra interessante osservazione, come visibile dai grafici, è il comportamento oscillatorio di Winnow, caratteristica propria dell'algoritmo. L'ampiezza dell'oscillazione dipende dai parametri interni dell'algoritmo.
 
